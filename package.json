@@ -1,0 +1,33 @@
+{
+  "name": "Node-Example",
+  "version": "0.0.1",
+  "description": "Node Project starting point",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rF dist",
+    "cover": "isparta cover --report text --report=html ./_tsCompilation/**/*.test.js",
+    "start": "tsc && node --harmony ./_tsCompilation",
+    "test": "ts-node node_modules/tape/bin/tape ./**/*.test.ts* | tap-spec"
+  },
+  "keywords": [],
+  "author": "Hicham El Hammouchi<hicham.elhammouchi@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^2.10.2",
+    "isparta": "^4.0.0",
+    "nodemon": "^1.9.2",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.5.1",
+    "ts-node": "^0.7.3",
+    "tslint": "^3.10.2",
+    "typescript": "^1.8.10",
+    "typings": "^1.0.4"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "helmet": "^2.1.0",
+    "morgan": "^1.7.0",
+    "winston": "^2.2.0"
+  }
+}

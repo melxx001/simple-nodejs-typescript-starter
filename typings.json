@@ -1,0 +1,11 @@
+{
+  "globalDependencies": {
+    "node": "registry:env/node#4.0.0+20160507210304"
+  },
+  "devDependencies": {
+    "tape": "registry:npm/tape#4.0.0+20160322235547"
+  },
+  "dependencies": {
+    "requirejs": "registry:npm/requirejs#2.2.0+20160319062357"
+  }
+}

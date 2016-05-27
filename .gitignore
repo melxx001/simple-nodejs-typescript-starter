@@ -1,0 +1,12 @@
+.idea
+*.iml
+logs
+*.log
+npm-debug.log*
+coverage
+build/Release
+node_modules
+out
+typings
+_tsCompilation
+dist
