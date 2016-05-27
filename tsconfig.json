@@ -1,6 +1,6 @@
 {
-  "compileOnSave": true,
-  "buildOnSave": true,
+  "compileOnSave": false,
+  "buildOnSave": false,
   "compilerOptions": {
     "module": "commonjs",
     "outDir": "./_tsCompilation",

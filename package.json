@@ -2,11 +2,11 @@
   "name": "Node-Example",
   "version": "0.0.1",
   "description": "Node Project starting point",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "clean": "rm -rF dist",
     "cover": "isparta cover --report text --report=html ./_tsCompilation/**/*.test.js",
-    "start": "tsc && node --harmony ./_tsCompilation",
+    "dev": "tsc -w & cross-env nodemon --harmony ./_tsCompilation/server.js",
     "test": "ts-node node_modules/tape/bin/tape ./**/*.test.ts* | tap-spec"
   },
   "keywords": [],
@@ -25,9 +25,12 @@
   },
   "dependencies": {
     "body-parser": "^1.15.1",
+    "cross-env": "^1.0.8",
+    "debug": "^2.2.0",
     "express": "^4.13.4",
     "helmet": "^2.1.0",
     "morgan": "^1.7.0",
+    "nconf": "^0.8.4",
     "winston": "^2.2.0"
   }
 }
