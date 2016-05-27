@@ -1,6 +1,8 @@
 {
   "globalDependencies": {
-    "node": "registry:env/node#4.0.0+20160507210304"
+    "node": "registry:env/node#4.0.0+20160507210304",
+    "superagent": "registry:dt/superagent#1.4.0+20160317120654",
+    "supertest": "registry:dt/supertest#1.1.0+20160317120654"
   },
   "devDependencies": {
     "tape": "registry:npm/tape#4.0.0+20160322235547"

@@ -3,3 +3,12 @@
 
 ## Typescript
 ### run typings install
+
+## nconf
+ - command line - no saving of passwords, passed in a env variables
+ - config file
+ - default settings
+
+## cross-env: Get the environment variable correctly in windows
+
+

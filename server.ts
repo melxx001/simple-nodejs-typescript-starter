@@ -10,6 +10,7 @@ nconf.argv().env().file({ file: './config.json' });
 
 nconf.defaults({
   'NODE_ENV': 'development',
+  'NODE_PATH': '.',
   'DEBUG': 'NodeExample:*',
   'PORT': 3000,
 
@@ -19,10 +20,14 @@ nconf.defaults({
   'logInJson': false,
 });
 
+// Environment variables
+const ROOT = nconf.get('NODE_PATH');
 const ENV = nconf.get('NODE_ENV');
 const PORT = nconf.get('PORT');
 const LOG_LEVEL = nconf.get('logLevel');
 const LOG_IN_JSON = nconf.get('logInJson');
+
+const isDev = ENV === 'development';
 
 // Can't use import here yet since harmony-modules
 // Check out node --v8-options | grep harmony
@@ -44,13 +49,32 @@ const logger = new winston.Logger({
 });
 
 const app = express();
+const path = require('path');
+const srcPath = `${ROOT}/client/`;
+const views = path.join(srcPath, 'views');
+const swig = require('swig');
+const cookieParser = require('cookie-parser');
+const favicon = require('serve-favicon');
 
+// view engine setup
+app.engine('swig', swig.renderFile);
+app.set('views', views);
+app.set('view engine', 'swig');
+
+swig.setDefaults({
+  loader: swig.loaders.fs(views),
+  cache: (isDev) ? false : true,
+});
+
+// Middlewares
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(favicon(path.join(srcPath, 'public', 'favicon.ico')));
+app.use(express.static(path.join(srcPath, 'public')));
 
-logger.info('Environment:', ENV);
-if (ENV === 'development') {
+if (isDev) {
   app.use(morgan('dev'));
 }
 
@@ -61,5 +85,78 @@ app.listen(PORT, (err) => {
     return;
   }
 
+  logger.info('Environment:', ENV);
   logger.info(`Listening on port ${PORT}`);
 });
+
+app.on('error', (error) => {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  let bind = typeof PORT === 'string' ? `Pipe ${PORT}` : `Port ${PORT}`;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+  case 'EACCES':
+    console.error(bind + ' requires elevated privileges');
+    process.exit(1);
+    break;
+  case 'EADDRINUSE':
+    console.error(bind + ' is already in use');
+    process.exit(1);
+    break;
+  default:
+    throw error;
+  }
+});
+
+// Process uncaught exsception
+process.on('uncaughtException', function(err) {
+  logger.error((new Date).toUTCString() + ' uncaughtException:', err.message);
+  logger.error(err.stack);
+});
+
+// initial route
+app.get('/', function(req, res) {
+    res.render('index', {
+      title: 'Index Page'
+    });
+});
+
+// catch 404 and forward to error handler
+app.use((req, res) => {
+  let err = new Error('Not Found');
+  res.status(404);
+  res.render('errors/404', {
+    message: err.message,
+    error: err,
+    show: true,
+  });
+});
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+  app.use((err, req, res) => {
+    res.status(err.status || 500);
+    res.render('errors/error', {
+      message: err.message,
+      error: err,
+      show: true,
+    });
+  });
+} else {
+  // production error handler
+  // no stacktraces leaked to user
+  app.use((err, req, res) => {
+    res.status(err.status || 500);
+    res.render('errors/error', {
+      message: err.message,
+      error: {},
+      show: false,
+    });
+  });
+}
+
+module.exports = app;

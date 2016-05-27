@@ -3,18 +3,17 @@
   "buildOnSave": false,
   "compilerOptions": {
     "module": "commonjs",
-    "outDir": "./_tsCompilation",
     "target": "es5",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "noImplicitAny": false,
     "removeComments": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "outDir": "_build"
   },
   "exclude": [
     "node_modules",
-    "dist",
-    "_tsCompilation",
+    "_build",
     "typings/index",
     "typings/index.d.ts"
   ]

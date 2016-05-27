@@ -1,0 +1,17 @@
+{% extends 'index.swig' %}
+
+{% block title %}Error Page{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Sorry</h1>
+    <p>Page Not Found</p>
+  </div>
+
+  {% if show %}
+    <div>
+      <p>Error: {{ message }}</p>
+      <p>Stack: {{ error.stack }}</p>
+    </div>
+  {% endif %}
+{% endblock %}
