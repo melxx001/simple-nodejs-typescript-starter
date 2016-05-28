@@ -54,11 +54,11 @@ http://www.typescriptlang.org/docs/handbook/tsconfig-json.html
 
  - Search for typings: `typings search <name>`
 
-Ex: `$ typings search react`
+    Ex: `$ typings search react`
 
  - Install typings: `typings install [<name>=]<location>`
 
-Ex: `$ typings install node -SG`
+    Ex: `$ typings install node -SG`
 
 ## Some of Modules installed
 
