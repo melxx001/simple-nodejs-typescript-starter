@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "clean": "rm -rF _build",
-    "cover": "isparta cover --report text --report=html ./_tsCompilation/**/*.test.js",
-    "dev": "tsc -w & cross-env NODE_PATH=. nodemon --harmony ./_build/server.js",
+    "cover": "isparta cover --report text --report=html _build/*.test.js",
+    "dev": "tsc -w & cross-env NODE_PATH=. NODE_ENV=development nodemon --harmony ./_build/server.js",
     "test": "ts-node node_modules/tape/bin/tape ./**/*.test.ts* | tap-spec"
   },
   "keywords": [],
