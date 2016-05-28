@@ -101,11 +101,11 @@ app.on('error', (error) => {
   // handle specific listen errors with friendly messages
   switch (error.code) {
   case 'EACCES':
-    console.error(bind + ' requires elevated privileges');
+    logger.error(bind + ' requires elevated privileges');
     process.exit(1);
     break;
   case 'EADDRINUSE':
-    console.error(bind + ' is already in use');
+    logger.error(bind + ' is already in use');
     process.exit(1);
     break;
   default:
@@ -113,7 +113,7 @@ app.on('error', (error) => {
   }
 });
 
-// Process uncaught exsception
+// Process uncaught exception
 process.on('uncaughtException', function(err) {
   logger.error((new Date).toUTCString() + ' uncaughtException:', err.message);
   logger.error(err.stack);
@@ -133,32 +133,19 @@ app.use((req, res) => {
   res.render('errors/404', {
     message: err.message,
     error: err,
-    show: true,
+    show: isDev ? true : false,
   });
 });
 
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
-  app.use((err, req, res) => {
-    res.status(err.status || 500);
-    res.render('errors/error', {
-      message: err.message,
-      error: err,
-      show: true,
-    });
+app.use((err, req, res) => {
+  res.status(err.status || 500);
+  res.render('errors/error', {
+    message: err.message ? err.message : 'Ooops... Something went wrong. We\'re fixing it',
+    error: err,
+    show: isDev ? true : false,
   });
-} else {
-  // production error handler
-  // no stacktraces leaked to user
-  app.use((err, req, res) => {
-    res.status(err.status || 500);
-    res.render('errors/error', {
-      message: err.message,
-      error: {},
-      show: false,
-    });
-  });
-}
+});
 
 module.exports = app;
