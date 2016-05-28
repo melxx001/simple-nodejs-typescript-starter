@@ -36,6 +36,8 @@ const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan'); // HTTP request logger middleware for node.js
 const winston = require('winston'); // Logger
+const i18next = require('i18next');
+const middleware = require('i18next-express-middleware');
 
 const logger = new winston.Logger({
   transports: [
@@ -50,7 +52,7 @@ const logger = new winston.Logger({
 
 const app = express();
 const path = require('path');
-const srcPath = `${ROOT}/client/`;
+const srcPath = `${ROOT}/src/`;
 const views = path.join(srcPath, 'views');
 const swig = require('swig');
 const cookieParser = require('cookie-parser');
