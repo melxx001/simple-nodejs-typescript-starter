@@ -32,6 +32,13 @@ You must name your test `<name>.test.ts` and save the file in the same folder of
 
 For example, tests for server.ts should be in server.test.ts
 
+`
+|- src
+  |- utils.ts
+  |- utils.test.ts
+|- server.ts
+|- server.test.ts
+`
 ### Coverage
 
 `$ npm run cover`
