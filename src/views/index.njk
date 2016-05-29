@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>{% block title %}{{ title }}{% endblock %}</title>
+  <title>{% block title %}{{ t("main.title") }}{% endblock %}</title>
 
   {% block head %}
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -13,7 +13,7 @@
 <body>
 {% block branding %}{% endblock %}
 {% block menu %}{% endblock %}
-{% block content %}{% endblock %}
+{% block content %}{{ t("main.description") }}{% endblock %}
 {% block footer %}{% endblock %}
 </body>
 </html>
