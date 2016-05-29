@@ -4,10 +4,10 @@
   "description": "Node Project starting point",
   "main": "server.js",
   "scripts": {
-    "clean": "rm -rF _build",
-    "cover": "isparta cover --report text --report=html _build/*.test.js",
+    "clean": "rm -Rf _build",
+    "cover": "ts-node node_modules/isparta/bin/isparta cover --report text --report html node_modules/tape/bin/tape ./**/*.test.ts",
     "dev": "tsc -w & cross-env NODE_PATH=. NODE_ENV=development nodemon --harmony ./_build/server.js",
-    "test": "ts-node node_modules/tape/bin/tape ./**/*.test.ts* | tap-spec"
+    "test": "ts-node node_modules/tape/bin/tape ./**/*.test.ts | tap-spec"
   },
   "keywords": [],
   "author": "Hicham El Hammouchi<hicham.elhammouchi@gmail.com>",

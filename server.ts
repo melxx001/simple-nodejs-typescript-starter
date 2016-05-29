@@ -1,5 +1,18 @@
 'use strict';
 
+// Can't use import here yet since harmony-modules
+// Check out node --v8-options | grep harmony
+const bodyParser = require('body-parser');
+const express = require('express');
+const helmet = require('helmet');
+const morgan = require('morgan'); // HTTP request logger middleware for node.js
+const winston = require('winston'); // Logger
+const i18next = require('i18next');
+const middleware = require('i18next-express-middleware');
+const path = require('path');
+const swig = require('swig');
+const cookieParser = require('cookie-parser');
+const favicon = require('serve-favicon');
 const nconf = require('nconf');
 
 // Setup nconf to use (in-order):
@@ -27,17 +40,8 @@ const PORT = nconf.get('PORT');
 const LOG_LEVEL = nconf.get('logLevel');
 const LOG_IN_JSON = nconf.get('logInJson');
 
+// Helper variables
 const isDev = ENV === 'development';
-
-// Can't use import here yet since harmony-modules
-// Check out node --v8-options | grep harmony
-const bodyParser = require('body-parser');
-const express = require('express');
-const helmet = require('helmet');
-const morgan = require('morgan'); // HTTP request logger middleware for node.js
-const winston = require('winston'); // Logger
-const i18next = require('i18next');
-const middleware = require('i18next-express-middleware');
 
 const logger = new winston.Logger({
   transports: [
@@ -50,13 +54,9 @@ const logger = new winston.Logger({
   exitOnError: false,
 });
 
-const app = express();
-const path = require('path');
 const srcPath = `${ROOT}/src/`;
 const views = path.join(srcPath, 'views');
-const swig = require('swig');
-const cookieParser = require('cookie-parser');
-const favicon = require('serve-favicon');
+const app = express();
 
 // view engine setup
 app.engine('swig', swig.renderFile);
@@ -64,7 +64,7 @@ app.set('views', views);
 app.set('view engine', 'swig');
 
 swig.setDefaults({
-  loader: swig.loaders.fs(views),
+  loader: swig.loaders.fs(views), // Each template path will start at the top views location
   cache: (isDev) ? false : true,
 });
 

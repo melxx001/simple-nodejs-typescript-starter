@@ -15,8 +15,7 @@ Setup your IDE (if you didn't already):
 
 Setup the project:
 
-- `$ npm install`
-- `$ typings install`
+`$ npm install && typings install`
 
 ## How to run
 
@@ -105,4 +104,4 @@ I decided to use the Tape test  module after reading https://medium.com/javascri
 
 ### isparta
 
-A code coverage tool for ES6
+Used for code coverage

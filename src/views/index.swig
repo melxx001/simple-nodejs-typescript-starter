@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>{% block title %}{% endblock %}</title>
+  <title>{% block title %}{{ title }}{% endblock %}</title>
 
   {% block head %}
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
