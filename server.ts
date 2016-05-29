@@ -8,12 +8,14 @@ const helmet = require('helmet');
 const morgan = require('morgan'); // HTTP request logger middleware for node.js
 const winston = require('winston'); // Logger
 const i18next = require('i18next');
-const middleware = require('i18next-express-middleware');
+const i18nextMiddleware = require('i18next-express-middleware');
 const path = require('path');
-const swig = require('swig');
+const nunjucks = require('nunjucks');
 const cookieParser = require('cookie-parser');
 const favicon = require('serve-favicon');
 const nconf = require('nconf');
+
+import * as utils from './src/utils/utils';
 
 // Setup nconf to use (in-order):
 //   1. Command-line arguments
@@ -58,21 +60,33 @@ const srcPath = `${ROOT}/src/`;
 const views = path.join(srcPath, 'views');
 const app = express();
 
-// view engine setup
-app.engine('swig', swig.renderFile);
-app.set('views', views);
-app.set('view engine', 'swig');
+i18next.init({
+  lng: 'en-US',
+  fallbackLng: 'en',
+}); // init localization
+// i18n.registerAppHelper(app); // translate inside template using t function
 
-swig.setDefaults({
-  loader: swig.loaders.fs(views), // Each template path will start at the top views location
-  cache: (isDev) ? false : true,
+// view engine setup
+app.engine('njk', nunjucks.render);
+app.set('views', views);
+app.set('view engine', 'njk');
+
+const env = nunjucks.configure(views, {
+  autoescape: true,
+  watch: isDev ? true : false,
+  noCache: isDev ? true : false,
+  express: app,
 });
+
+// Add filters that can be used in templates
+env.addFilter('i18n', utils.translate);
 
 // Middlewares
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(i18nextMiddleware.handle(i18next));
 app.use(favicon(path.join(srcPath, 'public', 'favicon.ico')));
 app.use(express.static(path.join(srcPath, 'public')));
 

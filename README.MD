@@ -67,10 +67,10 @@ http://www.typescriptlang.org/docs/handbook/tsconfig-json.html
 
 ## Some of Modules installed
 
-### swig
+### nunjucks
 
  A Node.js and Browser-based JavaScript Template Engine.
- Documentation available at http://paularmstrong.github.io/swig/docs/
+ Documentation available at http://mozilla.github.io/nunjucks/
 
 ### i18next
 

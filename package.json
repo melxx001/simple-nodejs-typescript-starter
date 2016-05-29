@@ -5,14 +5,17 @@
   "main": "server.js",
   "scripts": {
     "clean": "rm -Rf _build",
-    "cover": "ts-node node_modules/isparta/bin/isparta cover --report text --report html node_modules/tape/bin/tape ./**/*.test.ts",
-    "dev": "tsc -w & cross-env NODE_PATH=. NODE_ENV=development nodemon --harmony ./_build/server.js",
+    "compile": "tsc",
+    "cover": "ts-node node_modules/isparta/bin/isparta cover --report text --report html node_modules/tape/bin/tape -- -- ./**/*.test.ts",
+    "server:dev": "concurrently 'tsc -w' 'cross-env NODE_PATH=. NODE_ENV=development nodemon --harmony ./_build/server.js'",
+    "dev": "npm run clean && npm run compile && npm run server:dev",
     "test": "ts-node node_modules/tape/bin/tape ./**/*.test.ts | tap-spec"
   },
   "keywords": [],
   "author": "Hicham El Hammouchi<hicham.elhammouchi@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "concurrently": "^2.1.0",
     "eslint": "^2.10.2",
     "isparta": "^4.0.0",
     "nodemon": "^1.9.2",
@@ -35,8 +38,8 @@
     "i18next-express-middleware": "^1.0.1",
     "morgan": "^1.7.0",
     "nconf": "^0.8.4",
+    "nunjucks": "^2.4.2",
     "serve-favicon": "^2.3.0",
-    "swig": "^1.4.2",
     "winston": "^2.2.0"
   }
 }
