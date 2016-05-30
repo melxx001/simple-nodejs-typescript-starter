@@ -1,9 +1,6 @@
 verbose: false
 instrumentation:
-    root: ./src
     default-excludes: true
-    extensions:
-      - .test.ts
 reporting:
     print: summary
     reports:
