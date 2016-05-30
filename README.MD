@@ -1,5 +1,15 @@
 # Simple Node.js starter project with typescript & localization
 
+This starter project contains
+ - Typescript & typings
+ - i18next
+ - tape for testing
+ - istanbul coverage
+ - tslint & eslint
+ - Templating by nunjucks
+ - express
+ - winston for logging
+
 ## Installation
 
 Globally install the following modules so you can use them in the command line:
@@ -26,6 +36,7 @@ Setup the project:
 ### Running Tests
 
 `$ npm test`
+`$ npm test:watch` # This will re-run the test when only the test files are modified and saved.
 
 You must name your test `<name>.test.ts` and save the file in the same folder of the file you are testing.
 
@@ -39,11 +50,11 @@ For example, tests for server.ts should be in server.test.ts
 
 ### Coverage
 
-`$ npm run cover`
+`$ npm run coverage`
 
 Running coverage will display the coverage percentage in the console.
 
-It will also create a coverage folder with an index.html where you can view the results in a browser.
+It will also create a `./coverage` folder with an index.html where you can view the results in a browser.
 
 ## Typescript
 
@@ -53,7 +64,7 @@ Typescript documentation can be found at http://www.typescriptlang.org/docs/tuto
 
 ### Configuration
 
-http://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+Typescript configuration can be found at http://www.typescriptlang.org/docs/handbook/tsconfig-json.html
 
 ### Typings
 
@@ -70,38 +81,55 @@ http://www.typescriptlang.org/docs/handbook/tsconfig-json.html
 ### nunjucks
 
  A Node.js and Browser-based JavaScript Template Engine.
- Documentation available at http://mozilla.github.io/nunjucks/
+ Documentation available at http://mozilla.github.io/nunjucks/.
 
 ### i18next
 
 i18next is a very popular internationalization framework for browser or any other javascript environment.
-Documentation available at http://i18next.com/docs/
+Documentation available at http://i18next.com/docs/.
 
 ### express
 
 Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
-More information is available at http://expressjs.com/
+More information is available at http://expressjs.com/.
 
 ### helmet
 
- Help secure Express apps with various HTTP headers. Documentation at https://github.com/helmetjs/helmet
+ Help secure Express apps with various HTTP headers. Documentation can be found at https://github.com/helmetjs/helmet.
 
 ### winston
 
-A simple and universal logging library. Documentation at https://github.com/winstonjs/winston
+A simple and universal logging library. Documentation can be found at https://github.com/winstonjs/winston.
 
 ### nconf
 
 Hierarchical node.js configuration with files, environment variables, command-line arguments, and atomic object merging.
+Documentation can be found at https://www.npmjs.com/package/nconf
 
 ### cross-env:
 
-This micro-lib allows you to provide a script which sets an environment using unix style and have it work on windows too
+This micro-lib allows you to provide a script which sets an environment using unix style and have it work on windows too.
 
 ### tape
 
-I decided to use the Tape test  module after reading https://medium.com/javascript-scene/why-i-use-tape-instead-of-mocha-so-should-you-6aa105d8eaf4#.mo56gj6jk
+I decided to use the Tape test module after reading https://medium.com/javascript-scene/why-i-use-tape-instead-of-mocha-so-should-you-6aa105d8eaf4#.mo56gj6jk.
 
-### isparta
+#### tape-watch
 
-Used for code coverage
+Auto-test runner for tape.
+
+#### tape-spec
+
+Formatted TAP output like Mocha's spec reporter.
+
+### istanbul
+
+Used for code coverage. Documentation can be found at https://gotwarlost.github.io/istanbul/.
+
+### nodemon
+
+Nodemon is a utility that will monitor for any changes in your source and automatically restart the server. Documentation can be found at http://nodemon.io/.
+
+### concurrently
+
+Run commands concurrently cross platform. With the `--kill-others` switch, all commands are killed if one dies.
