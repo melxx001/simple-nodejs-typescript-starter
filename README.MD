@@ -2,7 +2,7 @@
 
 This starter project contains
  - Typescript & typings
- - i18next
+ - i18n-node
  - tape for testing
  - istanbul coverage
  - tslint & eslint
@@ -83,10 +83,10 @@ Typescript configuration can be found at http://www.typescriptlang.org/docs/hand
  A Node.js and Browser-based JavaScript Template Engine.
  Documentation available at http://mozilla.github.io/nunjucks/.
 
-### i18next
+### i18n-node
 
-i18next is a very popular internationalization framework for browser or any other javascript environment.
-Documentation available at http://i18next.com/docs/.
+Lightweight simple translation module for node.js / express.js with dynamic json storage. Uses common __('...') syntax in app and templates.
+Documentation available at https://github.com/mashpie/i18n-node.
 
 ### express
 
