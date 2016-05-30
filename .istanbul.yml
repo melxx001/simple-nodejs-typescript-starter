@@ -1,0 +1,18 @@
+verbose: false
+instrumentation:
+    root: ./src
+    default-excludes: true
+    extensions:
+      - .test.ts
+reporting:
+    print: summary
+    reports:
+      - lcov
+      - text
+      - html
+    dir: ./coverage
+    watermarks:
+        statements: [50, 80]
+        lines: [50, 80]
+        functions: [50, 80]
+        branches: [50, 80]
