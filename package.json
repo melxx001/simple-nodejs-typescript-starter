@@ -28,7 +28,7 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/melxx001/simple-nodejs-typescript-starter/issues"
-  }
+  },
   "devDependencies": {
     "concurrently": "^2.1.0",
     "eslint": "^2.10.2",
