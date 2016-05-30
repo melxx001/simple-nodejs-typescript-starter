@@ -2,7 +2,7 @@
   "name": "Node-Example",
   "version": "0.0.1",
   "description": "Node Project starting point",
-  "main": "server.js",
+  "main": "server.ts",
   "scripts": {
     "clean": "rm -Rf _build",
     "lint": "tslint 'src/**/*.ts' 'server*.ts'",
@@ -14,9 +14,21 @@
     "test": "ts-node node_modules/tape/bin/tape ./**/*.test.ts | tap-spec",
     "test:watch": "npm run clean && npm run compile && ts-node node_modules/tape-watch/bin/tape-watch ./src/**/*.test.ts -r typescript -p tap-spec"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/melxx001/simple-nodejs-typescript-starter.git"
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "typescript",
+    "i18n"
+  ],
   "author": "Hicham El Hammouchi<hicham.elhammouchi@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/melxx001/simple-nodejs-typescript-starter/issues"
+  }
   "devDependencies": {
     "concurrently": "^2.1.0",
     "eslint": "^2.10.2",
