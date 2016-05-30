@@ -76,6 +76,15 @@ Typescript configuration can be found at http://www.typescriptlang.org/docs/hand
 
     Ex: `$ typings install node -SG`
 
+## Localization
+
+This project uses [i18n-node](https://github.com/mashpie/i18n-node) for localization.
+
+A couple of way to change the language:
+
+- Pass the language as a query parameter using `lang` (Ex: http://localhost:3000/?lang=es)
+- Set the cookie `lang` with the language (Ex: en-US or es)
+
 ## Some of Modules installed
 
 ### nunjucks
