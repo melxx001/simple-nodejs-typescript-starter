@@ -7,15 +7,12 @@ const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan'); // HTTP request logger middleware for node.js
 const winston = require('winston'); // Logger
-const i18next = require('i18next');
-const i18nextMiddleware = require('i18next-express-middleware');
+const localization = require('i18n');
 const path = require('path');
 const nunjucks = require('nunjucks');
 const cookieParser = require('cookie-parser');
 const favicon = require('serve-favicon');
 const nconf = require('nconf');
-
-import * as utils from './src/utils/utils';
 
 // Setup nconf to use (in-order):
 //   1. Command-line arguments
@@ -33,6 +30,7 @@ nconf.defaults({
   'appName': 'NodeExample',
   'logLevel': 'debug',
   'logInJson': false,
+  'lang': 'en-US'
 });
 
 // Environment variables
@@ -44,7 +42,11 @@ const LOG_IN_JSON = nconf.get('logInJson');
 
 // Helper variables
 const isDev = ENV === 'development';
+const lang = nconf.get('lang');
+const srcPath = `${ROOT}/src/`;
+const views = path.join(srcPath, 'views');
 
+// Logging Setup
 const logger = new winston.Logger({
   transports: [
     new winston.transports.Console({
@@ -56,15 +58,8 @@ const logger = new winston.Logger({
   exitOnError: false,
 });
 
-const srcPath = `${ROOT}/src/`;
-const views = path.join(srcPath, 'views');
+// Express
 const app = express();
-
-i18next.init({
-  lng: 'en-US',
-  fallbackLng: 'en',
-}); // init localization
-// i18n.registerAppHelper(app); // translate inside template using t function
 
 // view engine setup
 app.engine('njk', nunjucks.render);
@@ -78,21 +73,39 @@ const env = nunjucks.configure(views, {
   express: app,
 });
 
-// Add filters that can be used in templates
-env.addFilter('i18n', utils.translate);
+// Configure localization
+localization.configure({
+  locales: ['en-US', 'es'],
+  defaultLocale: 'en-US',
+  cookie: 'lang',
+  queryParameter: 'lang',
+  directory: `${ROOT}/src/locales`,
+  autoReload: isDev ? true : false,
+  api: {
+    '__': 't',  // now req.__ becomes req.t
+    '__n': 'tn' // and req.__n can be called as req.tn
+  }
+});
 
 // Middlewares
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(i18nextMiddleware.handle(i18next));
+app.use(localization.init); // i18n init parses req for language headers, cookies, etc.
 app.use(favicon(path.join(srcPath, 'public', 'favicon.ico')));
 app.use(express.static(path.join(srcPath, 'public')));
 
 if (isDev) {
   app.use(morgan('dev'));
 }
+
+// Pass translate functions to templates
+app.use(function (req, res, next) {
+  env.addGlobal('translate', req.t);
+  env.addGlobal('plural_translate', req.tn);
+  next();
+});
 
 // Start up the server.
 app.listen(PORT, (err) => {
@@ -135,9 +148,7 @@ process.on('uncaughtException', function(err) {
 
 // initial route
 app.get('/', function(req, res) {
-    res.render('index', {
-      title: 'Index Page'
-    });
+    res.render('index');
 });
 
 // catch 404 and forward to error handler

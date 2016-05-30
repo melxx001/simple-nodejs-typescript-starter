@@ -12,7 +12,7 @@
     "server:dev": "concurrently --kill-others 'tsc -w' 'cross-env NODE_PATH=. NODE_ENV=development nodemon --harmony ./_build/server.js'",
     "dev": "npm run clean && npm run compile && npm run server:dev",
     "test": "ts-node node_modules/tape/bin/tape ./**/*.test.ts | tap-spec",
-    "test:watch": "ts-node node_modules/tape-watch/bin/tape-watch ./src/**/*.test.ts -r typescript -p tap-spec"
+    "test:watch": "npm run clean && npm run compile && ts-node node_modules/tape-watch/bin/tape-watch ./src/**/*.test.ts -r typescript -p tap-spec"
   },
   "keywords": [],
   "author": "Hicham El Hammouchi<hicham.elhammouchi@gmail.com>",
@@ -37,8 +37,7 @@
     "debug": "^2.2.0",
     "express": "^4.13.4",
     "helmet": "^2.1.0",
-    "i18next": "^3.1.0",
-    "i18next-express-middleware": "^1.0.1",
+    "i18n": "^0.8.2",
     "morgan": "^1.7.0",
     "nconf": "^0.8.4",
     "nunjucks": "^2.4.2",

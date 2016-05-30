@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>{% block title %}{{ "main.title" | i18n }}{% endblock %}</title>
+  <title>{% block title %}{{ translate('main_title') }}{% endblock %}</title>
 
   {% block head %}
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -13,7 +13,7 @@
 <body>
 {% block branding %}{% endblock %}
 {% block menu %}{% endblock %}
-{% block content %}{{ "main.description" | i18n }}{% endblock %}
+{% block content %}{{ translate('main_description') }}{% endblock %}
 {% block footer %}{% endblock %}
 </body>
 </html>
