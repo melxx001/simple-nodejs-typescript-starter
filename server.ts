@@ -26,7 +26,7 @@ nconf.defaults({
 
   // custom flags
   'appName': 'NodeExample',
-  'logLevel': 'debug',
+  'logLevel': 'warn',
   'logInJson': false,
   'lang': 'en-US'
 });
@@ -41,7 +41,7 @@ const isDev = ENV === 'development';
 const lang = nconf.get('lang');
 const srcPath = `${ROOT}/src/`;
 const views = path.join(srcPath, 'views');
-const { Logger, Debug } = require('./src/utils');
+const { Logger, LoggerMiddleware, Debug } = require('./src/utils');
 
 // Set debug function
 const debug = Debug('server');
@@ -99,6 +99,9 @@ app.use(function (req, res, next) {
   env.addGlobal('pluralTranslate', req.tn);
   next();
 });
+
+// Add the logger middleware so we can capture data automatically
+app.use(LoggerMiddleware(Logger));
 
 // Routes
 app.use(require('./src/routes'));
