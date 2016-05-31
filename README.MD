@@ -89,8 +89,24 @@ In templates, translation can be done by using the `translate` (for regular tran
 
 Ex:
 
+```json
+{
+	"main_title": "Node.js and Typescript Example",
+  "dogs": "[0] no dog|[2,5] some dogs|[6,11] many dogs|[12,36] dozens of dogs|a horde of %s dogs|[100,] too many dogs"
+
+}
+```
+
 ```html
 <div>{{ translate('main_title') }}</div>
+<div>{{ pluralTranslate('dogs', 100) }}</div>
+```
+
+Expected result:
+
+```html
+<div>Node.js and Typescript Example</div>
+<div>too many dogs</div>
 ```
 
 ## Some of Modules installed

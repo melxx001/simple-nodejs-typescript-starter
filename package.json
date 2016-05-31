@@ -1,5 +1,5 @@
 {
-  "name": "Node-Example",
+  "name": "NodeExample",
   "version": "0.0.1",
   "description": "Node Project starting point",
   "main": "server.ts",
@@ -9,7 +9,7 @@
     "compile": "tsc",
     "coverage": "npm run cover --coverage",
     "cover": "node_modules/istanbul/lib/cli.js test node_modules/tape/bin/tape ./_build/**/*.test.js | tap-spec",
-    "server:dev": "concurrently --kill-others 'tsc -w' 'cross-env NODE_PATH=. NODE_ENV=development nodemon --harmony ./_build/server.js'",
+    "server:dev": "concurrently --kill-others 'tsc -w' 'cross-env NODE_PATH=. NODE_ENV=development DEBUG=NodeExample:* nodemon --harmony ./_build/server.js'",
     "dev": "npm run clean && npm run compile && npm run server:dev",
     "test": "ts-node node_modules/tape/bin/tape ./**/*.test.ts | tap-spec",
     "test:watch": "npm run clean && npm run compile && ts-node node_modules/tape-watch/bin/tape-watch ./src/**/*.test.ts -r typescript -p tap-spec"
