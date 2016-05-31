@@ -110,6 +110,29 @@ Expected result:
 <div>too many dogs</div>
 ```
 
+## Utils
+
+### Logger
+
+`javascript
+const { Logger } = require('./src/utils');
+
+logger.debug("debug message");
+logger.info("info message");
+logger.warn("warn message");
+logger.error("error message");
+`
+
+### Debug
+
+`javascript
+const { Debug } = require('./src/utils');
+
+const debug = Debug('filename');
+debug("this is a test"); // If the environment variable appName has been set to NodeApp (see server.ts),
+                         // the debug output would be <date> NodeApp:filename this is a test
+`
+
 ## Some of Modules installed
 
 ### nunjucks
