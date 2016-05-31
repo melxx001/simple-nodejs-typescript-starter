@@ -1,17 +1,20 @@
 {% extends '../index.njk' %}
 
-{% block title %}Error Page{% endblock %}
+{% block title %}{{ translate('error_title') }}{% endblock %}
 
 {% block content %}
-  <div class="container">
-    <h1>Sorry</h1>
-    <p>An error occured</p>
+  <div>
+    <h1>{{ translate('error_title') }}</h1>
+    <p>{{ translate('error_message') }})</p>
   </div>
 
   {% if show %}
     <div>
-      <p>Error: {{ message }}</p>
-      <p>Stack: {{ error.stack }}</p>
-  </div>
+      <h2>Error Info <span style="font-weight: normal; font-size: medium;">(Show up only in development mode)</span></h2>
+      <p>
+        Error: {{ dev_message }} <br>
+        Stack: {{ error.stack }}
+      </p>
+    </div>
   {% endif %}
 {% endblock %}

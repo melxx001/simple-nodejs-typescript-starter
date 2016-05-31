@@ -107,6 +107,35 @@ app.use(function (req, res, next) {
   next();
 });
 
+// initial route
+app.get('/', function(req, res) {
+  res.render('index');
+});
+
+// catch 404 and forward to error handler
+app.use((req, res) => {
+  logger.debug('404 page not found');
+  let err = new Error('Not Found');
+  res.status(404);
+  res.render('errors/404', {
+    dev_message: err.message,
+    error: err,
+    show: isDev ? true : false,
+  });
+});
+
+// development error handler
+// will print stacktrace
+app.use((err, req, res) => {
+  res.status(err.status || 500);
+  logger.error(err.stack);
+  res.render('errors/error', {
+    message: err.message ? err.message : 'No Message',
+    error: err,
+    show: isDev ? true : false,
+  });
+});
+
 // Start up the server.
 app.listen(PORT, (err) => {
   if (err) {
@@ -127,16 +156,16 @@ app.on('error', (error) => {
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
-  case 'EACCES':
-    logger.error(bind + ' requires elevated privileges');
-    process.exit(1);
-    break;
-  case 'EADDRINUSE':
-    logger.error(bind + ' is already in use');
-    process.exit(1);
-    break;
-  default:
-    throw error;
+    case 'EACCES':
+      logger.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      logger.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
   }
 });
 
@@ -144,33 +173,6 @@ app.on('error', (error) => {
 process.on('uncaughtException', function(err) {
   logger.error((new Date).toUTCString() + ' uncaughtException:', err.message);
   logger.error(err.stack);
-});
-
-// initial route
-app.get('/', function(req, res) {
-    res.render('index');
-});
-
-// catch 404 and forward to error handler
-app.use((req, res) => {
-  let err = new Error('Not Found');
-  res.status(404);
-  res.render('errors/404', {
-    message: err.message,
-    error: err,
-    show: isDev ? true : false,
-  });
-});
-
-// development error handler
-// will print stacktrace
-app.use((err, req, res) => {
-  res.status(err.status || 500);
-  res.render('errors/error', {
-    message: err.message ? err.message : 'Ooops... Something went wrong. We\'re fixing it',
-    error: err,
-    show: isDev ? true : false,
-  });
 });
 
 module.exports = app;

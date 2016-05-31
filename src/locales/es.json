@@ -1,4 +1,8 @@
 {
   "main_title": "Node.js y Typescript Ejemplo",
-  "main_description": "Esta es una descripción de la prueba"
+  "main_description": "Esta es una descripción de la prueba.",
+  "error_message": "Lamentablemente ... Algo salió mal . Estamos fijándolo.",
+  "error_title": "Error de Página",
+  "404_message": "Lamentablemente ... No pudimos encontrar la página que está buscando.",
+  "404_title": "Página No Encontrada"
 }

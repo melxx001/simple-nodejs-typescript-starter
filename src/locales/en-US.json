@@ -1,4 +1,8 @@
 {
   "main_title": "Node.js and Typescript Example",
-  "main_description": "This is a test description"
+  "main_description": "This is a test description.",
+  "error_message": "Ooops... Something went wrong. We're fixing it.",
+  "error_title": "Error Page",
+  "404_message": "Ooops... We couldn't find the page you're looking for.",
+  "404_title": "Page Not Found"
 }
