@@ -5,7 +5,7 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const helmet = require('helmet');
-const morgan = require('morgan'); // HTTP request logger middleware for node.js
+const morgan = require('morgan'); // HTTP request Logger middleware for node.js
 const winston = require('winston'); // Logger
 const localization = require('i18n');
 const path = require('path');
@@ -19,11 +19,9 @@ const nconf = require('nconf');
 //   2. Environment variables
 //   3. A file located at './config.json'
 nconf.argv().env().file({ file: './config.json' });
-
 nconf.defaults({
   'NODE_ENV': 'development',
   'NODE_PATH': '.',
-  'DEBUG': 'NodeExample:*',
   'PORT': 3000,
 
   // custom flags
@@ -37,26 +35,20 @@ nconf.defaults({
 const ROOT = nconf.get('NODE_PATH');
 const ENV = nconf.get('NODE_ENV');
 const PORT = nconf.get('PORT');
-const LOG_LEVEL = nconf.get('logLevel');
-const LOG_IN_JSON = nconf.get('logInJson');
 
 // Helper variables
 const isDev = ENV === 'development';
 const lang = nconf.get('lang');
 const srcPath = `${ROOT}/src/`;
 const views = path.join(srcPath, 'views');
+const { Logger, Debug } = require('./src/utils');
 
-// Logging Setup
-const logger = new winston.Logger({
-  transports: [
-    new winston.transports.Console({
-      level: LOG_LEVEL,
-      handleExceptions: true,
-      json: LOG_IN_JSON,
-      colorize: true,
-    })],
-  exitOnError: false,
-});
+// Set debug function
+const debug = Debug('server');
+
+debug('isDev', isDev);
+debug('srcPath', srcPath);
+debug('Views path', views);
 
 // Express
 const app = express();
@@ -87,7 +79,7 @@ localization.configure({
   }
 });
 
-// Middlewares
+// Setup Middlewares
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -100,51 +92,64 @@ if (isDev) {
   app.use(morgan('dev'));
 }
 
-// Pass translate functions to templates
+// Pass translation function to templates
 app.use(function (req, res, next) {
+  debug('Passing translation functions to templates');
   env.addGlobal('translate', req.t);
-  env.addGlobal('plural_translate', req.tn);
+  env.addGlobal('pluralTranslate', req.tn);
   next();
 });
 
-// initial route
-app.get('/', function(req, res) {
-  res.render('index');
-});
+// Routes
+app.use(require('./src/routes'));
 
 // catch 404 and forward to error handler
 app.use((req, res) => {
-  logger.debug('404 page not found');
+  Logger.info('404 page not found');
   let err = new Error('Not Found');
-  res.status(404);
-  res.render('errors/404', {
+  let data = {
     dev_message: err.message,
-    error: err,
+    stack: err.stack,
     show: isDev ? true : false,
-  });
+  };
+  let status = 404;
+
+  res.status(status);
+  res.render('errors/404', data);
+
+  debug('%s params %s', status, JSON.stringify(data));
 });
 
 // development error handler
 // will print stacktrace
 app.use((err, req, res) => {
-  res.status(err.status || 500);
-  logger.error(err.stack);
-  res.render('errors/error', {
+  let data = {
     message: err.message ? err.message : 'No Message',
-    error: err,
+    stack: err.stack,
     show: isDev ? true : false,
-  });
+  };
+
+  let status = err.status || 500;
+
+  res.status(status);
+  Logger.error(err.stack);
+  res.render('errors/error', data);
+
+  debug('%s params %s', status, JSON.stringify(data));
 });
 
-// Start up the server.
+// Start up the server
 app.listen(PORT, (err) => {
   if (err) {
-    logger.error(err);
+    Logger.error(err);
     return;
   }
 
-  logger.info('Environment:', ENV);
-  logger.info(`Listening on port ${PORT}`);
+  Logger.info('Environment:', ENV);
+  Logger.info(`Listening on port ${PORT}`);
+
+  debug('Environment:', ENV);
+  debug(`Listening on port ${PORT}`);
 });
 
 app.on('error', (error) => {
@@ -157,11 +162,11 @@ app.on('error', (error) => {
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      logger.error(bind + ' requires elevated privileges');
+      Logger.error(bind + ' requires elevated privileges');
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      logger.error(bind + ' is already in use');
+      Logger.error(bind + ' is already in use');
       process.exit(1);
       break;
     default:
@@ -171,8 +176,8 @@ app.on('error', (error) => {
 
 // Process uncaught exception
 process.on('uncaughtException', function(err) {
-  logger.error((new Date).toUTCString() + ' uncaughtException:', err.message);
-  logger.error(err.stack);
+  Logger.error((new Date).toUTCString() + ' uncaughtException:', err.message);
+  Logger.error(err.stack);
 });
 
 module.exports = app;
