@@ -64,7 +64,7 @@ const loggerMiddleware = (logr: LoggerInstance) => {
         'responseTime': (time - startTime).toString(),
         'url': req.originalUrl,
         requestedUrl,
-        'ip': req.headers['x-forwarded-for'] || req.ip || req.connection.remoteAddress,
+        'ip': req.headers['x-forwarded-for'] || req.ip,
         'userAgent': userAgent
       };
 

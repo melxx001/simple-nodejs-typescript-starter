@@ -8,8 +8,8 @@
     "lint": "tslint 'src/**/*.ts' 'server*.ts'",
     "compile": "tsc",
     "coverage": "npm run cover --coverage",
-    "cover": "node_modules/istanbul/lib/cli.js test node_modules/tape/bin/tape ./_build/**/*.test.js -x **/*.test.js | tap-spec",
-    "server:dev": "concurrently --kill-others 'tsc -w' 'cross-env NODE_PATH=. NODE_ENV=development DEBUG=NodeExample:* nodemon --harmony ./_build/server.js'",
+    "cover": "npm run clean && npm run compile && node_modules/istanbul/lib/cli.js test node_modules/tape/bin/tape ./_build/**/*.test.js -x **/*.test.js | tap-spec",
+    "server:dev": "concurrently --kill-others 'tsc -w' 'cross-env NODE_PATH=. NODE_ENV=development logLevel=debug DEBUG=NodeExample:* nodemon --harmony ./_build/server.js'",
     "dev": "npm run clean && npm run compile && npm run server:dev",
     "test": "ts-node node_modules/tape/bin/tape ./**/*.test.ts | tap-spec",
     "test:watch": "npm run clean && npm run compile && ts-node node_modules/tape-watch/bin/tape-watch ./src/**/*.test.ts -r typescript -p tap-spec"
@@ -34,6 +34,7 @@
     "eslint": "^2.10.2",
     "istanbul": "^0.4.3",
     "nodemon": "^1.9.2",
+    "supertest": "^1.2.0",
     "tap-spec": "^4.1.1",
     "tape": "^4.5.1",
     "tape-watch": "^2.1.0",
