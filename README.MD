@@ -91,7 +91,7 @@ Ex:
 
 ```json
 {
-	"main_title": "Node.js and Typescript Example",
+  "main_title": "Node.js and Typescript Example",
   "dogs": "[0] no dog|[2,5] some dogs|[6,11] many dogs|[12,36] dozens of dogs|a horde of %s dogs|[100,] too many dogs"
 }
 ```
