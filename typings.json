@@ -3,9 +3,11 @@
     "express": "registry:dt/express#4.0.0+20160317120654",
     "express-serve-static-core": "registry:dt/express-serve-static-core#0.0.0+20160322035842",
     "i18n-node": "registry:dt/i18n-node#0.0.0+20160521152545",
+    "nconf": "registry:dt/nconf#0.0.0+20160316155526",
     "node": "registry:env/node#4.0.0+20160507210304",
     "serve-static": "registry:dt/serve-static#0.0.0+20160501131543",
-    "superagent": "registry:dt/superagent#1.4.0+20160317120654"
+    "superagent": "registry:dt/superagent#1.4.0+20160317120654",
+    "winston": "registry:dt/winston#0.0.0+20160417152829"
   },
   "globalDevDependencies": {
     "supertest": "registry:dt/supertest#1.1.0+20160317120654"
