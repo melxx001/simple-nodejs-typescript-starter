@@ -8,7 +8,7 @@
     "lint": "tslint 'src/**/*.ts' 'server*.ts'",
     "compile": "tsc",
     "coverage": "npm run cover --coverage",
-    "cover": "node_modules/istanbul/lib/cli.js test node_modules/tape/bin/tape ./_build/**/*.test.js | tap-spec",
+    "cover": "node_modules/istanbul/lib/cli.js test node_modules/tape/bin/tape ./_build/**/*.test.js -x **/*.test.js | tap-spec",
     "server:dev": "concurrently --kill-others 'tsc -w' 'cross-env NODE_PATH=. NODE_ENV=development DEBUG=NodeExample:* nodemon --harmony ./_build/server.js'",
     "dev": "npm run clean && npm run compile && npm run server:dev",
     "test": "ts-node node_modules/tape/bin/tape ./**/*.test.ts | tap-spec",
