@@ -89,6 +89,7 @@ In templates, translation can be done by using the `translate` (for regular tran
 
 Ex:
 
+In en-US.json:
 ```json
 {
   "main_title": "Node.js and Typescript Example",
@@ -96,6 +97,7 @@ Ex:
 }
 ```
 
+In index.njk:
 ```html
 <div>{{ translate('main_title') }}</div>
 <div>{{ pluralTranslate('dogs', 100) }}</div>
