@@ -80,10 +80,18 @@ Typescript configuration can be found at http://www.typescriptlang.org/docs/hand
 
 This project uses [i18n-node](https://github.com/mashpie/i18n-node) for localization.
 
-A couple of way to change the language:
+A couple of ways to change the language:
 
 - Pass the language as a query parameter using `lang` (Ex: http://localhost:3000/?lang=es)
 - Set the cookie `lang` with the language (Ex: en-US or es)
+
+In templates, translation can be done by using the `translate` (for regular translations) and `pluralTranslate` (for plural translations) functions:
+
+Ex:
+
+```html
+<div>{{ translate('main_title') }}</div>
+```
 
 ## Some of Modules installed
 
@@ -142,3 +150,7 @@ Nodemon is a utility that will monitor for any changes in your source and automa
 ### concurrently
 
 Run commands concurrently cross platform. With the `--kill-others` switch, all commands are killed if one dies.
+
+### debug
+
+Used to output debugging messages
