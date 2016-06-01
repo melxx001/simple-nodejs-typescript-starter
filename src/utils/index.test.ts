@@ -1,12 +1,12 @@
 import * as test from 'tape';
 import * as utils from './index';
+import * as CustomInterfaces from './interfaces';
 import {LoggerInstance} from 'winston';
 import * as request from 'supertest';
 import * as express from 'express';
 
-test('Utils Test', (t) => {
-
-  let logger = utils.Logger;
+test('Utils Test', (t: test.Test) : void => {
+  let logger: LoggerInstance = utils.Logger;
   // Logger Tests
   if (!logger) {
     t.error('logger is undefined');
@@ -20,47 +20,49 @@ test('Utils Test', (t) => {
   }
 
   // Debug function test
-  let debug = utils.Debug;
+  let debug: Function = utils.Debug;
   if (!debug) {
     t.error('debug is undefined');
   } else {
     t.equal(typeof debug, 'function', 'Check if debug function exists');
   }
+  
+  t.end(); // end the test
+});
 
-  // Test Logger Middleware
-  let loggerMiddleware = utils.LoggerMiddleware;
+test('LoggerMiddleware Test', (t: test.Test) : void => {
+  let loggerMiddleware: Function = utils.LoggerMiddleware;
   if (!loggerMiddleware) {
     t.error('loggerMiddleware is undefined');
   } else {
     let createServer = (logr: LoggerInstance) => {
-      let app = express();
+      let app: express.Express = express();
       logr.level = 'info';
       app.use(loggerMiddleware(logr));
 
-      app.get('/', (req, res) => {
+      app.get('/', (req: CustomInterfaces.CustomRequest, res: CustomInterfaces.CustomResponse) => {
         res.status(200).json({ completed: true });
       });
 
       return app;
     };
 
-    let app = createServer(utils.Logger);
+    let app: express.Express = createServer(utils.Logger);
 
-    utils.Logger.once('logged', (level, message, data) => {
-       if (!(data.statusCode && data.method && data.url && data.responseTime && data.ip && data.userAgent)) {
-         t.error('loggerMiddleware did not returned the correct data');
-       } else {
-         t.pass('Check if loggerMiddleware outputs correctly');
-       }
+    utils.Logger.once('logged', (level?: string, message?: string, data?: any) : void => {
+      if (!(data.statusCode && data.method && data.url && data.responseTime && data.ip && data.userAgent)) {
+        t.error('loggerMiddleware did not returned the correct data');
+      } else {
+        t.pass('Check if loggerMiddleware outputs correctly');
+      }
+
+      t.end();
     });
 
-    request(app).get('/').end((err, res) => {
+    request(app).get('/').end((err?: any) : void => {
       if (err) {
         throw err;
       }
     });
   }
-
-  t.equal(typeof debug, 'function', 'another test');
-  t.end(); // end the test
-});
+})

@@ -48,7 +48,7 @@ debugLog('logLevel', logLevel);
 debugLog('logInJson', logInJson);
 
 // Logger middleware where we can capture all the data we want
-const loggerMiddleware = (logr: LoggerInstance) : RequestHandler => {
+const loggerMiddleware: Function = (logr: LoggerInstance) : Function => {
   const url = require('url');
   const events = require('events');
 
