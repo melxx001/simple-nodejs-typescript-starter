@@ -2,9 +2,11 @@
 
 import {Logger, LoggerInstance, transports} from 'winston';
 import * as nconf from 'nconf';
+import {Response, Request, RequestHandler} from 'express';
 
-const logLevel = nconf.get('logLevel');
-const logInJson = nconf.get('logInJson');
+const logLevel: string = nconf.get('logLevel');
+const logInJson: string = nconf.get('logInJson');
+const lang: string = nconf.get('lang');
 
 const customLevels = {
   levels: {
@@ -21,7 +23,7 @@ const customLevels = {
 };
 
 // Logger Setup
-const logger = new Logger({
+const logger : LoggerInstance = new Logger({
   transports: [
     new transports.Console({
       level: logLevel,
@@ -36,42 +38,43 @@ const logger = new Logger({
 });
 
 // Set debug module with appName from configuration
-const dbg = (name: string) => {
+const dbg: Function = (name: string) => {
   const appName = nconf.get('appName');
   return require('debug')(`${appName}:${name}`);
 };
 
-const debugLog = dbg('utils');
+const debugLog : Function = dbg('utils');
 debugLog('logLevel', logLevel);
 debugLog('logInJson', logInJson);
 
 // Logger middleware where we can capture all the data we want
-const loggerMiddleware = (logr: LoggerInstance) => {
+const loggerMiddleware = (logr: LoggerInstance) : RequestHandler => {
   const url = require('url');
   const events = require('events');
 
-  return (req: any, res: any, next: any) : any => {
+  return (req: Request, res: Response, next: Function) : void => {
     let requestEnd = res.end;
     let requestedUrl: string = url.parse(req.originalUrl);
-    let startTime: any  = new Date();
+    let startTime: Date  = new Date();
     let userAgent: string = req.get('User-Agent');
 
-    res.end = (chunk, encoding) => {
-      let time: any = new Date();
-      let data: any = {
+    res.end = (chunk?: any, encoding?: any) : void => {
+      let time: Date = new Date();
+      let data = {
         'statusCode': res.statusCode,
         'method': req.method,
-        'responseTime': (time - startTime).toString(),
+        'responseTime': time.getTime() - startTime.getTime(),
         'url': req.originalUrl,
         requestedUrl,
         'ip': req.headers['x-forwarded-for'] || req.ip,
-        'userAgent': userAgent
+        'userAgent': userAgent,
+        'language': req.query.lang || lang
       };
 
       res.end = requestEnd;
       res.end(chunk, encoding);
 
-      logr.info(data);
+      logr.info('', data);
     };
 
     next();
