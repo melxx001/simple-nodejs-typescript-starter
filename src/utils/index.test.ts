@@ -4,7 +4,7 @@ import {LoggerInstance} from 'winston';
 import * as request from 'supertest';
 import * as express from 'express';
 
-test('Utils Test', (t) => {
+test('Utils Tests', (t) => {
 
   let logger = utils.Logger;
   // Logger Tests
