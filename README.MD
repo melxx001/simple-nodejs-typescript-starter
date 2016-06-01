@@ -36,7 +36,6 @@ Setup the project:
 ### Running Tests
 
 `$ npm test`
-`$ npm test:watch` # This will re-run the test when only the test files are modified and saved.
 
 You must name your test `<name>.test.ts` and save the file in the same folder of the file you are testing.
 
