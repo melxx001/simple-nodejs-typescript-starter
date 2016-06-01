@@ -2,8 +2,10 @@
 
 // Can't use import here yet since harmony-modules
 // Check out node --v8-options | grep harmony
+
+import * as express from 'express';
+
 const bodyParser = require('body-parser');
-const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan'); // HTTP request Logger middleware for node.js
 const winston = require('winston'); // Logger
@@ -44,26 +46,30 @@ nconf.defaults({
 });
 
 // Environment variables
-const ROOT = nconf.get('NODE_PATH');
-const ENV = nconf.get('NODE_ENV');
-const PORT = nconf.get('PORT');
+const ROOT: string = nconf.get('NODE_PATH');
+const ENV: string = nconf.get('NODE_ENV');
+const PORT: string = nconf.get('PORT');
 
 // Helper variables
-const isDev = ENV === 'development';
-const lang = nconf.get('lang');
-const srcPath = `${ROOT}/src/`;
-const views = path.join(srcPath, 'views');
-const { Logger, LoggerMiddleware, Debug } = require('./src/utils');
+const isDev: Boolean = ENV === 'development';
+const lang: string = nconf.get('lang');
+const srcPath: string = `${ROOT}/src/`;
+const views: string = path.join(srcPath, 'views');
+
+// Utils Import
+import {Logger, LoggerMiddleware, Debug} from './src/utils';
+import * as CustomInterfaces from './src/utils/interfaces';
 
 // Set debug function
-const debug = Debug('server');
+const debug: Function = Debug('server');
+
 
 debug('isDev', isDev);
 debug('srcPath', srcPath);
 debug('Views path', views);
 
 // Express
-const app = express();
+const app: express.Express = express();
 
 // view engine setup
 app.engine('njk', nunjucks.render);
@@ -72,8 +78,8 @@ app.set('view engine', 'njk');
 
 const env = nunjucks.configure(views, {
   autoescape: true,
-  watch: isDev ? true : false,
-  noCache: isDev ? true : false,
+  watch: isDev,
+  noCache: isDev,
   express: app,
 });
 
@@ -84,7 +90,7 @@ localization.configure({
   cookie: 'lang',
   queryParameter: 'lang',
   directory: `${ROOT}/src/locales`,
-  autoReload: isDev ? true : false,
+  autoReload: isDev,
   api: {
     '__': 't',  // now req.__ becomes req.t
     '__n': 'tn' // and req.__n can be called as req.tn
@@ -105,7 +111,7 @@ if (isDev) {
 }
 
 // Pass translation function to templates
-app.use(function (req, res, next) {
+app.use((req: CustomInterfaces.CustomRequest, res: CustomInterfaces.CustomResponse, next: Function) : void => {
   debug('Passing translation functions to templates');
   env.addGlobal('translate', req.t);
   env.addGlobal('pluralTranslate', req.tn);
@@ -119,15 +125,16 @@ app.use(LoggerMiddleware(Logger));
 app.use(require('./src/routes'));
 
 // catch 404 and forward to error handler
-app.use((req, res) => {
+app.use((req: CustomInterfaces.CustomRequest, res: CustomInterfaces.CustomResponse) : void => {
   Logger.info('404 page not found');
-  let err = new Error('Not Found');
-  let data = {
+  let err : CustomInterfaces.Error = new Error('Not Found');
+  let data: CustomInterfaces.DevMessage = {
     dev_message: err.message,
     stack: err.stack,
-    show: isDev ? true : false,
+    show: isDev,
   };
-  let status = 404;
+
+  let status: number = 404;
 
   res.status(status);
   res.render('errors/404', data);
@@ -137,14 +144,15 @@ app.use((req, res) => {
 
 // development error handler
 // will print stacktrace
-app.use((err, req, res) => {
-  let data = {
-    message: err.message ? err.message : 'No Message',
+app.use((err: CustomInterfaces.Error, req: CustomInterfaces.CustomRequest,
+         res: CustomInterfaces.CustomResponse) : void => {
+  let data: CustomInterfaces.DevMessage = {
+    dev_message: err.message ? err.message : 'No Message',
     stack: err.stack,
-    show: isDev ? true : false,
+    show: isDev,
   };
 
-  let status = err.status || 500;
+  let status: number = err.status || 500;
 
   res.status(status);
   Logger.error(err.stack);
@@ -154,7 +162,7 @@ app.use((err, req, res) => {
 });
 
 // Start up the server
-app.listen(PORT, (err) => {
+app.listen(PORT, (err?: any) : void  => {
   if (err) {
     Logger.error(err);
     return;
@@ -167,12 +175,12 @@ app.listen(PORT, (err) => {
   debug(`Listening on port ${PORT}`);
 });
 
-app.on('error', (error) => {
+process.on('error', (error: NodeJS.ErrnoException) => {
   if (error.syscall !== 'listen') {
     throw error;
   }
 
-  let bind = typeof PORT === 'string' ? `Pipe ${PORT}` : `Port ${PORT}`;
+  let bind : string = typeof PORT === 'string' ? `Pipe ${PORT}` : `Port ${PORT}`;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -190,7 +198,7 @@ app.on('error', (error) => {
 });
 
 // Process uncaught exception
-process.on('uncaughtException', function(err) {
+process.on('uncaughtException', function(err: CustomInterfaces.Error) {
   Logger.error((new Date).toUTCString() + ' uncaughtException:', err.message);
   Logger.error(err.stack);
 });
