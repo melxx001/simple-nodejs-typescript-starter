@@ -1,12 +1,16 @@
 {
   "globalDependencies": {
+    "es6-shim": "registry:dt/es6-shim#0.31.2+20160317120654",
     "express": "registry:dt/express#4.0.0+20160317120654",
     "express-serve-static-core": "registry:dt/express-serve-static-core#0.0.0+20160322035842",
     "i18n-node": "registry:dt/i18n-node#0.0.0+20160521152545",
+    "lodash": "registry:dt/lodash#3.10.0+20160330154726",
     "nconf": "registry:dt/nconf#0.0.0+20160316155526",
     "node": "registry:env/node#4.0.0+20160507210304",
+    "sequelize": "registry:dt/sequelize#3.4.1+20160423143634",
     "serve-static": "registry:dt/serve-static#0.0.0+20160501131543",
     "superagent": "registry:dt/superagent#1.4.0+20160317120654",
+    "validator": "registry:dt/validator#4.5.1+20160316155526",
     "winston": "registry:dt/winston#0.0.0+20160417152829"
   },
   "globalDevDependencies": {

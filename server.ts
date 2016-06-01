@@ -20,15 +20,27 @@ const nconf = require('nconf');
 //   3. A file located at './config.json'
 nconf.argv().env().file({ file: './config.json' });
 nconf.defaults({
-  'NODE_ENV': 'development',
-  'NODE_PATH': '.',
-  'PORT': 3000,
+  NODE_ENV: 'development',
+  NODE_PATH: '.',
+  PORT: 3000,
+
+  // DB Data (MySQL)
+  dbHost: 'localhost',
+  dbName: 'dev',
+  dbUser: 'root',
+  dbPassword: 'root',
+  dbDialect: 'mysql',
+  dbPool: {
+    max: 5,
+    min: 0,
+    idle: 10000
+  },
 
   // custom flags
-  'appName': 'NodeExample',
-  'logLevel': 'warn',
-  'logInJson': false,
-  'lang': 'en-US'
+  appName: 'NodeExample',
+  logLevel: 'warn',
+  logInJson: false,
+  lang: 'en-US'
 });
 
 // Environment variables

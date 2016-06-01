@@ -9,10 +9,10 @@
     "compile": "tsc",
     "coverage": "npm run cover --coverage",
     "cover": "npm run clean && npm run compile && node_modules/istanbul/lib/cli.js test node_modules/tape/bin/tape ./_build/**/*.test.js -x **/*.test.js | tap-spec",
-    "server:dev": "concurrently --kill-others 'tsc -w' 'cross-env NODE_PATH=. NODE_ENV=development logLevel=debug nodemon --harmony ./_build/server.js'",
+    "server:dev": "concurrently --kill-others 'tsc -w' 'cross-env NODE_PATH=. NODE_ENV=development logLevel=debug DEBUG=NodeExample:* appName=NodeExample nodemon --harmony ./_build/server.js'",
     "dev": "npm run clean && npm run compile && npm run server:dev",
-    "test": "ts-node node_modules/tape/bin/tape ./**/*.test.ts | tap-spec",
-    "test:watch": "npm run clean && npm run compile && ts-node node_modules/tape-watch/bin/tape-watch ./src/**/*.test.ts -r typescript -p tap-spec"
+    "test": "cross-env DEBUG=NodeExample:* appName=NodeExample ts-node node_modules/tape/bin/tape ./**/*.test.ts | tap-spec",
+    "test:watch": "npm run clean && npm run compile && cross-env DEBUG=NodeExample:* appName=NodeExample ts-node node_modules/tape-watch/bin/tape-watch ./src/**/*.test.ts -r typescript -p tap-spec"
   },
   "repository": {
     "type": "git",
@@ -52,8 +52,10 @@
     "helmet": "^2.1.0",
     "i18n": "^0.8.2",
     "morgan": "^1.7.0",
+    "mysql": "^2.10.2",
     "nconf": "^0.8.4",
     "nunjucks": "^2.4.2",
+    "sequelize": "^3.23.3",
     "serve-favicon": "^2.3.0",
     "winston": "^2.2.0"
   }
