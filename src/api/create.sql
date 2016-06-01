@@ -1,0 +1,16 @@
+CREATE DATABASE `dev` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+CREATE TABLE `dev`.`user` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(255) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  `firstName` VARCHAR(255) NULL,
+  `middleName` VARCHAR(255) NULL,
+  `lastName` VARCHAR(255) NULL,
+  `createdTime` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedTime` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC)
+);
+
+
