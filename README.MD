@@ -27,6 +27,13 @@ Setup the project:
 
 `$ npm install && typings install`
 
+Setup a database with docker:
+
+```bash
+$ docker pull mysql
+$ docker run --name nodemysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=dev -d mysql:latest
+```
+
 ## How to run
 
 ### Start the app in dev mode
