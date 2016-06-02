@@ -48,9 +48,12 @@ const connect = (config: DbConfig = defaultDbConfig) : Sequelize.Sequelize => {
   });
 };
 
+import {User} from './models/user';
+
 export {
   connect as Connect,
   defaultDbConfig as DefaultDbConfig,
-  DbConfig
+  DbConfig,
+  User
 };
 

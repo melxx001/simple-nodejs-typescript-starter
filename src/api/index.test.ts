@@ -34,11 +34,63 @@ test('Api Config Tests', (t: test.Test) => {
 
 test('Api DB Connection Tests', (t: test.Test) => {
   const connection: Sequelize.Sequelize = api.Connect();
-  if (connection.validate()) {
-    t.equals(connection.getDialect(), defaults.dbDriver, 'Check connection driver');
-  } else {
-    t.error('No connection to DB');
-  }
 
-  t.end();
+  connection.validate().then((err: Sequelize.ValidationError) : void => {
+    if (err) {
+      t.error(err);
+    } else {
+      t.pass('Check if successful connection');
+    }
+    connection.close();
+    t.end();
+  });
+});
+
+test('Api DB Tests', (t: test.Test) => {
+  const connection: Sequelize.Sequelize = api.Connect();
+
+  connection.validate().then((err: Sequelize.ValidationError) : void => {
+    if (err) {
+      t.error(err);
+    }
+
+    const user = api.User(connection);
+    const data = {
+      email: 'hicham.elhammouchi@gmail.com',
+      password: '12345',
+      firstName: 'Hicham',
+      middleName: 'M',
+      lastName: 'El Hammouchi',
+    };
+
+    user.sync().then((theUser: Sequelize.Model<any, any>) : void | PromiseLike<any> => {
+      if (!theUser && typeof theUser.create !== 'function') {
+        t.error('user.sync failed');
+        connection.close();
+        t.end();
+        return;
+      }
+
+      // Create and add data to DB
+      return theUser.create(data);
+
+    }).then((result: Sequelize.Instance<any>) : void => {
+      if (!result && typeof result.get !== 'function'){
+        t.error('Getting result failed');
+        connection.close();
+        t.end();
+        return;
+      }
+
+      const theResult = result.get();
+      t.equal(theResult.email, data.email, 'Check if email saved correctly');
+      t.equal(theResult.password, data.password, 'Check if password saved correctly');
+      t.equal(theResult.firstName, data.firstName, 'Check if first name saved correctly');
+      t.equal(theResult.middleName, data.middleName, 'Check if middle name saved correctly');
+      t.equal(theResult.lastName, data.lastName, 'Check if last name saved correctly');
+      
+      connection.close();
+      t.end();
+    });
+  });
 });

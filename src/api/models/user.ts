@@ -1,28 +1,20 @@
-import * as Sequelize from 'sequelize';
+'use strict';
 
-const User = {
-  id: {
-    type: Sequelize.INTEGER,
-  },
-  email: {
-    type: Sequelize.STRING,
-  },
-  password: {
-    type: Sequelize.STRING,
-  },
-  firstName: {
-    type: Sequelize.STRING,
-  },
-  middleName: {
-    type: Sequelize.STRING,
-  },
-  lastName: {
-    type: Sequelize.STRING,
-  },
-  createdTime: {
-    type: Sequelize.TIME,
-  },
-  updatedTime: {
-    type: Sequelize.TIME,
-  },
+import * as S from 'sequelize';
+
+const User = (sequelize: S.Sequelize) => {
+  return sequelize.define('user', {
+    email: S.STRING,
+    password: S.STRING,
+    firstName: S.STRING,
+    middleName: S.STRING,
+    lastName: S.STRING,
+    // createdTime: S.TIME,
+    // updatedTime: S.TIME,
+  });
 };
+
+export {
+  User
+};
+
