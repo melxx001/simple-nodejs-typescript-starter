@@ -1,26 +1,56 @@
 'use strict';
 
 import * as nconf from 'nconf';
+import * as Sequelize from 'sequelize';
 
 const { Debug } = require('../utils');
- 
+const debug: Function = Debug('api');
 
-const dbHost = nconf.get('dbHost');
-const dbName = nconf.get('dbName');
-const dbUser = nconf.get('dbUser');
-const dbPassword = nconf.get('dbPassword');
-const dbDialect = nconf.get('dbDialect');
-const dbPool = nconf.get('dbPool');
-const debug = Debug('api');
+interface DbConfig {
+  dbHost: string;
+  dbPort: number;
+  dbName: string;
+  dbUserName: string;
+  dbPassword: string;
+  dbDriver: string;
+  dbPool: Sequelize.PoolOptions;
+}
 
-debug('dbHost', dbHost);
-debug('dbName', dbName);
-debug('dbUser', dbUser);
-debug('dbPassword', dbPassword);
-debug('dbDialect', dbDialect);
-debug('dbPool', dbPool);
+const dbHost: string = nconf.get('dbHost');
+const dbPort: number = nconf.get('dbPort');
+const dbName: string = nconf.get('dbName');
+const dbUserName: string = nconf.get('dbUserName');
+const dbPassword: string = nconf.get('dbPassword');
+const dbDriver: string = nconf.get('dbDriver');
+const dbPool: Sequelize.PoolOptions = nconf.get('dbPool');
 
-export function test (value: number) {
-  return value + 1;
+const defaultDbConfig: DbConfig = {
+  dbUserName: dbUserName,
+  dbPassword: dbPassword,
+  dbName: dbName,
+  dbDriver: dbDriver,
+  dbHost: dbHost,
+  dbPort: dbPort,
+  dbPool: dbPool,
+};
+
+const connect = (config: DbConfig = defaultDbConfig) : Sequelize.Sequelize => {
+  debug('config', config);
+  return new Sequelize(config.dbName, config.dbUserName, config.dbPassword, {
+    host: config.dbHost,
+    port: config.dbPort,
+    dialect: config.dbDriver,
+    pool: {
+      maxConnections: config.dbPool.maxConnections,
+      minConnections: config.dbPool.minConnections,
+      maxIdleTime: config.dbPool.maxIdleTime,
+    },
+  });
+};
+
+export {
+  connect as Connect,
+  defaultDbConfig as DefaultDbConfig,
+  DbConfig
 };
 

@@ -29,13 +29,13 @@ nconf.defaults({
   // DB Data (MySQL)
   dbHost: 'localhost',
   dbName: 'dev',
-  dbUser: 'root',
+  dbUserName: 'root',
   dbPassword: 'root',
   dbDriver: 'mysql',
   dbPool: {
-    max: 5,
-    min: 0,
-    idle: 10000
+    maxConnections: 5,
+    minConnections: 0,
+    maxIdleTime: 10000
   },
 
   // custom flags
