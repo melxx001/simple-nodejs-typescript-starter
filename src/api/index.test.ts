@@ -32,8 +32,22 @@ test('Api Config Tests', (t: test.Test) => {
   t.end();
 });
 
-test('Api DB Connection Tests', (t: test.Test) => {
+test('Api DB Connection Tests without config', (t: test.Test) => {
   const connection: Sequelize.Sequelize = api.Connect();
+
+  connection.validate().then((err: Sequelize.ValidationError) : void => {
+    if (err) {
+      t.error(err);
+    } else {
+      t.pass('Check if successful connection');
+    }
+    connection.close();
+    t.end();
+  });
+});
+
+test('Api DB Connection Test with config', (t: test.Test) => {
+  const connection: Sequelize.Sequelize = api.Connect(defaults);
 
   connection.validate().then((err: Sequelize.ValidationError) : void => {
     if (err) {
@@ -88,7 +102,7 @@ test('Api DB Tests', (t: test.Test) => {
       t.equal(theResult.firstName, data.firstName, 'Check if first name saved correctly');
       t.equal(theResult.middleName, data.middleName, 'Check if middle name saved correctly');
       t.equal(theResult.lastName, data.lastName, 'Check if last name saved correctly');
-      
+
       connection.close();
       t.end();
     });
