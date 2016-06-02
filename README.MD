@@ -9,7 +9,7 @@ This starter project contains
  - Templating by nunjucks
  - express
  - winston for logging
- - carminte cross-db ORM
+ - sequelize ORM
 
 ## Installation
 
