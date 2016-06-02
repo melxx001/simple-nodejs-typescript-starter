@@ -41,6 +41,13 @@ $ docker pull mysql
 $ docker run --name nodemysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=dev -d mysql:latest
 ```
 
+Connect to the DB using:
+
+- host: 127.0.0.1
+- port: 3306
+- username: root
+- password: root
+
 ## How to run
 
 ### Start the app in dev mode
