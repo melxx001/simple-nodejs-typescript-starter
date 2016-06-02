@@ -1,0 +1,6 @@
+coverage
+_build
+node_modules
+typings
+.idea
+.git
