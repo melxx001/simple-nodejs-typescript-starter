@@ -14,11 +14,18 @@ This starter project contains
 
 Globally install the following modules so you can use them in the command line:
 
-- `$ npm install -g typescript`
+#### Required
+
 - `$ npm install -g typings`
+
+#### Optional
+
+- `$ npm install -g typescript`
 - `$ npm install -g eslint`
+- `$ npm install -g caminte-cli`
 
 Setup your IDE (if you didn't already):
+
 - Enable typescript to read from tsconfig.json
 - Enable tslint to read from tslint.json
 - Enable eslint to read from .eslintrc
@@ -139,6 +146,11 @@ debug("this is a test"); // If the environment variable appName has been set to 
                          // the debug output would be <date> NodeApp:filename this is a test
 ```
 
+## Caminte Cross-DB ORM
+
+Documentation available at http://www.camintejs.com/ or https://github.com/biggora/caminte
+
+
 ## Some of Modules installed
 
 ### nunjucks
@@ -200,3 +212,4 @@ Run commands concurrently cross platform. With the `--kill-others` switch, all c
 ### debug
 
 Used to output debugging messages
+
