@@ -1,4 +1,4 @@
-# Simple Node.js starter project with typescript & localization
+# Simple Node.js starter project with typescript & localization & a cross-db ORM
 
 This starter project contains
  - Typescript & typings
@@ -9,6 +9,7 @@ This starter project contains
  - Templating by nunjucks
  - express
  - winston for logging
+ - carminte cross-db ORM
 
 ## Installation
 
@@ -22,7 +23,6 @@ Globally install the following modules so you can use them in the command line:
 
 - `$ npm install -g typescript`
 - `$ npm install -g eslint`
-- `$ npm install -g caminte-cli`
 
 Setup your IDE (if you didn't already):
 
@@ -146,9 +146,9 @@ debug("this is a test"); // If the environment variable appName has been set to 
                          // the debug output would be <date> NodeApp:filename this is a test
 ```
 
-## Caminte Cross-DB ORM
+## Sequelize ORM
 
-Documentation available at http://www.camintejs.com/ or https://github.com/biggora/caminte
+Documentation available at http://docs.sequelizejs.com/en/latest/.
 
 
 ## Some of Modules installed
