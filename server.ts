@@ -31,7 +31,7 @@ nconf.defaults({
   dbName: 'dev',
   dbUser: 'root',
   dbPassword: 'root',
-  dbDialect: 'mysql',
+  dbDriver: 'mysql',
   dbPool: {
     max: 5,
     min: 0,
