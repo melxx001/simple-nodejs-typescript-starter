@@ -5,7 +5,8 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   eval $NPM_CMD install --development
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
+
+  echo Compiling typescript code
+  $NPM_CMD compile
 fi
 
-echo Compiling typescript code
-npm compile
