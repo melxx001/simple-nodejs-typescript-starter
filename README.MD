@@ -1,5 +1,9 @@
 # Simple Node.js starter project with typescript & localization
 
+
+## Status
+[![Build Status](https://travis-ci.org/melxx001/simple-nodejs-typescript-starter.svg?branch=master)](https://travis-ci.org/melxx001/simple-nodejs-typescript-starter) [![Coverage Status](https://coveralls.io/repos/github/melxx001/simple-nodejs-typescript-starter/badge.svg?branch=master)](https://coveralls.io/github/melxx001/simple-nodejs-typescript-starter?branch=master)
+
 This starter project contains
  - Typescript & typings
  - i18n-node
