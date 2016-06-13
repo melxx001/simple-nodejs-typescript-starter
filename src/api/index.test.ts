@@ -5,7 +5,7 @@ import * as Sequelize from 'sequelize';
 const defaults = {
   dbHost: 'localhost',
   dbPort: 3306,
-  dbName: 'dev',
+  dbName: 'test',
   dbUserName: 'root',
   dbPassword: 'root',
   dbDriver: 'mysql',
@@ -77,7 +77,7 @@ test('Api DB Tests', (t: test.Test) => {
       lastName: 'El Hammouchi',
     };
 
-    user.sync().then((theUser: Sequelize.Model<any, any>) : void | PromiseLike<any> => {
+    user.sync({force: true}).then((theUser: Sequelize.Model<any, any>) : void | PromiseLike<any> => {
       if (!theUser && typeof theUser.create !== 'function') {
         t.error('user.sync failed');
         connection.close();
@@ -108,3 +108,4 @@ test('Api DB Tests', (t: test.Test) => {
     });
   });
 });
+
