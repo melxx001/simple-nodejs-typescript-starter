@@ -5,13 +5,9 @@ SCRIPT_DIR="${SCRIPT_DIR%/*}"
 ARTIFACTS=$SCRIPT_DIR/../artifacts
 DEPLOYMENT_TARGET=$ARTIFACTS/wwwroot
 
-if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
   eval $NPM_CMD install
 
-  exitWithMessageOnError "npm failed"
-  cd - > /dev/null
-fi
 
   eval $NPM_CMD install -g typescript
 
