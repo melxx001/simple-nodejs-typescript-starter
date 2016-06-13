@@ -13,7 +13,7 @@
     "dev": "npm run build && npm run server:dev",
     "build": "npm run clean && npm run compile",
     "prod": "cross-env NODE_PATH=. NODE_ENV=production logLevel=warn node --harmony ./_build/server.js",
-    "start": "cross-env NODE_PATH=. NODE_ENV=production logLevel=warn node --harmony ./_build/server.js",
+    "start": "node --harmony ./_build/server.js",
     "test": "ts-node node_modules/tape/bin/tape ./**/*.test.ts | tap-spec",
     "test:watch": "npm run build && ts-node node_modules/tape-watch/bin/tape-watch ./src/**/*.test.ts -r typescript -p tap-spec"
   },
@@ -32,6 +32,9 @@
   "bugs": {
     "url": "https://github.com/melxx001/simple-nodejs-typescript-starter/issues"
   },
+  "engines": {
+    "node": "6.2.0"
+  }
   "devDependencies": {
     "concurrently": "^2.1.0",
     "coveralls": "^2.11.9",
