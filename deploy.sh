@@ -2,7 +2,12 @@
 
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
+  $NPM_CMD install -g typescript
+  $NPM_CMD install -g typings
+
   eval $NPM_CMD install --development
+  typings install
+
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
 
