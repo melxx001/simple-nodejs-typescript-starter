@@ -2,11 +2,7 @@ language: node_js
 node_js:
   - "6"
 
-services:
-  - mysql
-
 before_install:
-  - mysql -e "create database IF NOT EXISTS test;" -uroot
   - npm install -g typings
   - typings install
 
