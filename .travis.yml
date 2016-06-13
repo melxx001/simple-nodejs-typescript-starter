@@ -6,7 +6,7 @@ services:
   - mysql
 
 before_install:
-  - mysql -e "create database IF NOT EXISTS test;use mysql; update user set password=PASSWORD('root') where user='root'" -u root
+  - mysql -e "create database IF NOT EXISTS test;use mysql; update user set password=root where user='root'" -u root
   - npm install -g typings
   - typings install
 
