@@ -26,7 +26,7 @@ test('Utils Test', (t: test.Test) : void => {
   } else {
     t.equal(typeof debug, 'function', 'Check if debug function exists');
   }
-  
+
   t.end(); // end the test
 });
 
@@ -65,4 +65,4 @@ test('LoggerMiddleware Test', (t: test.Test) : void => {
       }
     });
   }
-})
+});
