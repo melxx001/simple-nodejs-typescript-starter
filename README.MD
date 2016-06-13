@@ -1,5 +1,9 @@
 # Simple Node.js starter project with typescript & localization & a cross-db ORM
 
+
+## Status
+[![Build Status](https://travis-ci.org/melxx001/simple-nodejs-typescript-starter.svg?branch=api)](https://travis-ci.org/melxx001/simple-nodejs-typescript-starter) [![Coverage Status](https://coveralls.io/repos/github/melxx001/simple-nodejs-typescript-starter/badge.svg?branch=api)](https://coveralls.io/github/melxx001/simple-nodejs-typescript-starter?branch=api)
+
 This starter project contains
  - Typescript & typings
  - i18n-node
