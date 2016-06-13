@@ -13,13 +13,20 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd - > /dev/null
 fi
 
-$NPM_CMD install -g typescript
-$NPM_CMD install -g typings
 
-echo Installing typings
-eval "node_modules/.bin/typings" install
-exitWithMessageOnError "typings failed"
+if [[ -n "$POST_DEPLOYMENT_ACTION" ]]; then
+  $NPM_CMD install -g typescript
+  $NPM_CMD install -g typings
 
-echo Compiling typescript code
-eval "node_modules/.bin/tsc"
-exitWithMessageOnError "tsc failed"
+  echo Installing typings
+  eval "node_modules/.bin/typings" install
+  exitWithMessageOnError "typings failed"
+
+  echo Compiling typescript code
+  eval "node_modules/.bin/tsc"
+  exitWithMessageOnError "tsc failed"
+  
+  $NPM_CMD run dev
+fi
+
+echo "Finished successfully."

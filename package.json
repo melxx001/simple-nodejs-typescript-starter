@@ -13,7 +13,6 @@
     "lint": "tslint 'src/**/*.ts' 'server*.ts'",
     "prod": "cross-env NODE_PATH=. NODE_ENV=production logLevel=warn node --harmony ./_build/server.js",
     "server:dev": "concurrently --kill-others 'tsc -w' 'cross-env NODE_PATH=. NODE_ENV=development logLevel=debug nodemon --harmony ./_build/server.js'",
-    "start": "node ./_build/server.js",
     "test": "ts-node node_modules/tape/bin/tape ./**/*.test.ts | tap-spec",
     "test:watch": "npm run build && ts-node node_modules/tape-watch/bin/tape-watch ./src/**/*.test.ts -r typescript -p tap-spec"
   },
