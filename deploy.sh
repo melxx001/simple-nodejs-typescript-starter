@@ -19,11 +19,11 @@ fi
   $NPM_CMD install -g typings
 
   echo Installing typings
-  eval "node_modules/.bin/typings" install
+  typings install
   exitWithMessageOnError "typings failed"
 
   echo Compiling typescript code
-  eval "node_modules/.bin/tsc"
+  tsc
   exitWithMessageOnError "tsc failed"
 
   $NPM_CMD run dev
