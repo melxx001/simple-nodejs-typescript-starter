@@ -12,6 +12,6 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd - > /dev/null
 
   echo Compiling typescript code
-  $NPM_CMD compile
+  tsc
 fi
 
