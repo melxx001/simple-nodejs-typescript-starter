@@ -14,7 +14,7 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
 fi
 
 
-if [[ -n "$POST_DEPLOYMENT_ACTION" ]]; then
+
   $NPM_CMD install -g typescript
   $NPM_CMD install -g typings
 
@@ -25,8 +25,8 @@ if [[ -n "$POST_DEPLOYMENT_ACTION" ]]; then
   echo Compiling typescript code
   eval "node_modules/.bin/tsc"
   exitWithMessageOnError "tsc failed"
-  
+
   $NPM_CMD run dev
-fi
+
 
 echo "Finished successfully."
