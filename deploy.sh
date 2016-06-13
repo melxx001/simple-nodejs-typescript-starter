@@ -7,13 +7,13 @@ DEPLOYMENT_TARGET=$ARTIFACTS/wwwroot
 
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
-  eval $NPM_CMD install --development
+  eval $NPM_CMD install
 
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
 fi
 
-  $NPM_CMD install -g typescript
+  eval $NPM_CMD install -g typescript
 
   echo Compiling typescript code
   eval "node_modules/typescript/bin/tsc"
