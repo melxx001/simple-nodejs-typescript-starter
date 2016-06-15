@@ -11,6 +11,7 @@
     "coverage": "npm run cover --coverage",
     "dev": "npm run build && npm run server:dev",
     "lint": "node_modules/tslint/bin/tslint 'src/**/*.ts' 'server*.ts'",
+    "postinstall": "typings install",
     "prod": "node_modules/cross-env/bin/cross-env.js NODE_PATH=. NODE_ENV=production logLevel=warn node --harmony ./_build/server.js",
     "server:dev": "concurrently --kill-others 'node_modules/typescript/bin/tsc -w' 'node_modules/cross-env/bin/cross-env.js NODE_PATH=. NODE_ENV=development logLevel=debug nodemon --harmony ./_build/server.js'",
     "test": "ts-node node_modules/tape/bin/tape ./**/*.test.ts | tap-spec",

@@ -16,7 +16,7 @@ This starter project contains
 
 ## Installation
 
-Globally install the following modules so you can use them in the command line:
+(Optional) Globally install the following modules so you can use them in the command line:
 
 - `$ npm install -g typescript`
 - `$ npm install -g typings`
@@ -29,7 +29,7 @@ Setup your IDE (if you didn't already):
 
 Setup the project:
 
-`$ npm install && typings install`
+`$ npm install`
 
 ## How to run
 
