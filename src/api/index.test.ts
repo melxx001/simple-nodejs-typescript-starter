@@ -89,7 +89,7 @@ test('Api DB Tests', (t: test.Test) => {
       return theUser.create(data);
 
     }).then((result: Sequelize.Instance<any>) : void => {
-      if (!result && typeof result.get !== 'function'){
+      if (!result && typeof result.get !== 'function') {
         t.error('Getting result failed');
         connection.close();
         t.end();

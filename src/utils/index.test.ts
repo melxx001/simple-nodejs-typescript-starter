@@ -65,4 +65,4 @@ test('LoggerMiddleware Test', (t: test.Test) : void => {
       }
     });
   }
-})
+});

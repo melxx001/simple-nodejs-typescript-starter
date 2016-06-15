@@ -31,7 +31,7 @@ Setup your IDE (if you didn't already):
 
 Setup the project:
 
-`$ npm install && typings install`
+`$ npm install`
 
 Setup a database with docker:
 
