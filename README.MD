@@ -17,14 +17,9 @@ This starter project contains
 
 ## Installation
 
-Globally install the following modules so you can use them in the command line:
-
-#### Required
+(Optional) Globally install the following modules so you can use them in the command line:
 
 - `$ npm install -g typings`
-
-#### Optional
-
 - `$ npm install -g typescript`
 - `$ npm install -g eslint`
 
