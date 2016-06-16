@@ -2,7 +2,7 @@
   "name": "NodeExample",
   "version": "0.0.1",
   "description": "Node Project starting point",
-  "main": "server.ts",
+  "main": "_build/server.js",
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -Rf _build",
