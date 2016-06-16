@@ -10,8 +10,6 @@ services:
 
 before_install:
   - mysql -e "create database IF NOT EXISTS test;use mysql; update user set password=PASSWORD('root') where user='root'; flush privileges;" -u root
-  - npm install -g typings
-  - typings install
 
 script: "npm run coverage"
 # Send coverage data to Coveralls
