@@ -1,21 +1,21 @@
 {
   "globalDependencies": {
-    "body-parser": "registry:dt/body-parser#0.0.0+20160317120654",
+    "body-parser": "registry:dt/body-parser#0.0.0+20160619023215",
     "cookie-parser": "registry:dt/cookie-parser#1.3.4+20160316155526",
     "es6-shim": "registry:dt/es6-shim#0.31.2+20160317120654",
     "express": "registry:dt/express#4.0.0+20160317120654",
-    "express-serve-static-core": "registry:dt/express-serve-static-core#0.0.0+20160322035842",
+    "express-serve-static-core": "registry:dt/express-serve-static-core#0.0.0+20160617060422",
     "helmet": "registry:dt/helmet#0.0.0+20160512043842",
     "i18n-node": "registry:dt/i18n-node#0.0.0+20160521152545",
     "lodash": "registry:dt/lodash#3.10.0+20160330154726",
     "morgan": "registry:dt/morgan#1.7.0+20160524142355",
     "mysql": "registry:dt/mysql#0.0.0+20160316155526",
     "nconf": "registry:dt/nconf#0.0.0+20160316155526",
-    "node": "registry:env/node#4.0.0+20160507210304",
-    "nunjucks": "registry:dt/nunjucks#0.0.0+20160505174532",
+    "node": "registry:env/node#6.0.0+20160610031852",
+    "nunjucks": "registry:dt/nunjucks#0.0.0+20160602153016",
     "sequelize": "registry:dt/sequelize#3.4.1+20160423143634",
     "serve-favicon": "registry:dt/serve-favicon#0.0.0+20160316155526",
-    "serve-static": "registry:dt/serve-static#0.0.0+20160501131543",
+    "serve-static": "registry:dt/serve-static#0.0.0+20160606155157",
     "superagent": "registry:dt/superagent#1.4.0+20160317120654",
     "validator": "registry:dt/validator#4.5.1+20160316155526",
     "winston": "registry:dt/winston#0.0.0+20160417152829"
@@ -24,7 +24,7 @@
     "supertest": "registry:dt/supertest#1.1.0+20160317120654"
   },
   "devDependencies": {
-    "tape": "registry:npm/tape#4.0.0+20160322235547"
+    "tape": "registry:npm/tape#4.0.0+20160607230938"
   },
   "dependencies": {
     "mime": "registry:npm/mime#1.3.0+20160423043021",
