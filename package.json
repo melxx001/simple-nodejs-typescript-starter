@@ -6,16 +6,16 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -Rf _build",
-    "compile": "npm run typings && tsc",
-    "cover": "npm run build && istanbul test node_modules/tape/bin/tape ./_build/**/*.test.js -x **/*.test.js | tap-spec",
+    "compile": "npm run typings && node_modules/.bin/tsc",
+    "cover": "npm run build && node_modules/.bin/istanbul test node_modules/.bin/tape ./_build/**/*.test.js -x **/*.test.js | tap-spec",
     "coverage": "npm run cover --coverage",
     "dev": "npm run build && npm run server:dev",
-    "lint": "tslint 'src/**/*.ts' 'server*.ts'",
-    "prod": "cross-env NODE_PATH=. NODE_ENV=production logLevel=warn node --harmony ./_build/server.js",
-    "server:dev": "concurrently --kill-others 'tsc -w' 'cross-env NODE_PATH=. NODE_ENV=development logLevel=debug nodemon --harmony ./_build/server.js'",
-    "test": "npm run typings && ts-node node_modules/tape/bin/tape ./**/*.test.ts | tap-spec",
-    "test:watch": "npm run build && ts-node node_modules/tape-watch/bin/tape-watch ./src/**/*.test.ts -r typescript -p tap-spec",
-    "typings": "typings install"
+    "lint": "node_modules/.bin/tslint 'src/**/*.ts' 'server*.ts'",
+    "prod": "node_modules/.bin/cross-env NODE_PATH=. NODE_ENV=production logLevel=warn node --harmony ./_build/server.js",
+    "server:dev": "node_modules/.bin/concurrently --kill-others 'node_modules/.bin/tsc -w' 'node_modules/.bin/cross-env NODE_PATH=. NODE_ENV=development logLevel=debug node_modules/.bin/nodemon --harmony ./_build/server.js'",
+    "test": "npm run typings && node_modules/.bin/ts-node node_modules/.bin/tape ./**/*.test.ts | tap-spec",
+    "test:watch": "npm run build && node_modules/.bin/ts-node node_modules/.bin/tape-watch ./src/**/*.test.ts -r typescript -p tap-spec",
+    "typings": "node_modules/.bin/typings install"
   },
   "repository": {
     "type": "git",
