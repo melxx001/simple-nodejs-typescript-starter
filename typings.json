@@ -7,7 +7,7 @@
     "express-serve-static-core": "registry:dt/express-serve-static-core#0.0.0+20160617060422",
     "helmet": "registry:dt/helmet#0.0.0+20160512043842",
     "i18n-node": "registry:dt/i18n-node#0.0.0+20160521152545",
-    "lodash": "registry:dt/lodash#3.10.0+20160330154726",
+    "lodash": "registry:dt/lodash#3.10.0+20160619033623",
     "morgan": "registry:dt/morgan#1.7.0+20160524142355",
     "mysql": "registry:dt/mysql#0.0.0+20160316155526",
     "nconf": "registry:dt/nconf#0.0.0+20160316155526",
