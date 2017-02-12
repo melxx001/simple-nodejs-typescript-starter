@@ -10,7 +10,7 @@ services:
 before_install:
   - mysql -e "create database IF NOT EXISTS test;use mysql; update user set password=PASSWORD('root') where user='root'; flush privileges;" -u root
 
-script: "yarn cover"
+script: yarn cover
 # Send coverage data to Coveralls
-after_script: "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -v"
+after_script: cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js --verbose
 
