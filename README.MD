@@ -1,4 +1,4 @@
-# Simple Node.js starter project with typescript & localization
+# Simple Node.js starter project with typescript & localization & a cross-db ORM
 
 
 ## Status
@@ -13,47 +13,79 @@ This starter project contains
  - Templating by nunjucks
  - express
  - winston for logging
+ - sequelize ORM
 
 ## Installation
 
-(Optional) Globally install the following modules so you can use them in the command line:
+1. Globally install **yarn**
 
-- `$ npm install -g typescript`
-- `$ npm install -g typings`
-- `$ npm install -g eslint`
+You can find instruction at https://yarnpkg.com/en/docs/install
 
-Setup your IDE (if you didn't already):
+2. Install Docker
+
+You can find instruction at https://docs.docker.com/engine/installation/
+
+Once downloaded and installed, you should have access to docker and docker-compose.
+
+3.- Setup your IDE (if you didn't already):
+
 - Enable typescript to read from tsconfig.json
 - Enable tslint to read from tslint.json
 - Enable eslint to read from .eslintrc
 
-Setup the project:
+4.- Setup the project:
 
-`$ npm install`
+**Run all the following commands in the root of your project**
+
+Run `$ yarn` and it will install all the dependencies. 
+
+Setup a database with docker:
+
+```bash
+$ docker pull mysql # This will get the latest mysql docker image
+$ docker-compose up # This will create or start a container called simplenodejstypescriptstarter_mysql_1
+```
+
+**NOTE**: docker-compose will run all the SQL files in the folder testData located in root. 
+
+ - A few useful docker commands:
+   - `$ docker-compose up` will start (or create) the container
+   - `$ docker-compose down` will stop the container
+   - `$ docker ps` will show all active containers
+   - `$ docker ps -a` will show all active and stopped containers
+   - `docker rm <NAME OR DOCKER CONTAINER>` will delete the container. 
+     - Ex: `docker rm simplenodejstypescriptstarter_mysql_1`
+
+Connect to the DB using some DB UI like MySQLWorkbench:
+
+- host: 127.0.0.1
+- port: 3306
+- username: root
+- password: root
 
 ## How to run
 
 ### Start the app in dev mode
 
-`$ npm run dev`
+`$ yarn dev`
 
 ### Running Tests
 
-`$ npm test`
+`$ yarn test`
 
-You must name your test `<name>.test.ts` and save the file in the same folder of the file you are testing.
+You must name your test `<name>.spec.ts` and save the file in the same folder of the file you are testing.
 
-For example, tests for server.ts should be in server.test.ts
+For example, tests for server.ts should be in server.spec.ts
 
     |-- src
       |-- utils.ts
-      |-- utils.test.ts
+      |-- utils.spec.ts
     |-- server.ts
-    |-- server.test.ts
+    |-- server.spec.ts
 
 ### Coverage
 
-`$ npm run coverage`
+`$ yarn cover`
 
 Running coverage will display the coverage percentage in the console.
 
@@ -68,16 +100,6 @@ Typescript documentation can be found at http://www.typescriptlang.org/docs/tuto
 ### Configuration
 
 Typescript configuration can be found at http://www.typescriptlang.org/docs/handbook/tsconfig-json.html
-
-### Typings
-
- - Search for typings: `typings search <name>`
-
-    Ex: `$ typings search react`
-
- - Install typings: `typings install [<name>=]<location>`
-
-    Ex: `$ typings install node -SG`
 
 ## Localization
 
@@ -135,6 +157,10 @@ const debug = Debug('filename');
 debug("this is a test"); // If the environment variable appName has been set to NodeApp (see server.ts),
                          // the debug output would be <date> NodeApp:filename this is a test
 ```
+
+## Sequelize ORM
+
+Documentation available at http://docs.sequelizejs.com/en/latest/.
 
 ## Some of Modules installed
 
@@ -197,3 +223,4 @@ Run commands concurrently cross platform. With the `--kill-others` switch, all c
 ### debug
 
 Used to output debugging messages
+

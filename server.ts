@@ -20,18 +20,8 @@ const nconf = require('nconf');
 //   1. Command-line arguments
 //   2. Environment variables
 //   3. A file located at './config.json'
-nconf.argv().env().file({ file: './config.json' });
-nconf.defaults({
-  'NODE_ENV': 'development',
-  'NODE_PATH': '.',
-  'PORT': 3000,
-
-  // custom flags
-  'appName': 'NodeExample',
-  'logLevel': 'warn',
-  'logInJson': false,
-  'lang': 'en-US'
-});
+nconf.argv().env().file({ file: `./config/${process.env.NODE_ENV}.json` });
+nconf.defaults(require('./config/default'));
 
 // Environment variables
 const ROOT: string = nconf.get('NODE_PATH');

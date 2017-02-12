@@ -4,17 +4,25 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es5",
+    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "noImplicitAny": false,
     "removeComments": true,
     "sourceMap": true,
-    "outDir": "_build"
+    "outDir": "_build",
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ]
   },
   "exclude": [
     "node_modules",
-    "_build",
-    "typings/index",
-    "typings/index.d.ts"
+    "_build"
   ]
 }
+
+
