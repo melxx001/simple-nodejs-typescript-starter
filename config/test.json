@@ -1,0 +1,14 @@
+{
+  "logLevel": "debug",
+  "logInJson": true,
+  "DB_PORT": 3306,
+  "DB_USERNAME": "root",
+  "DB_PASSWORD": "root",
+  "DB_DATABASE_NAME": "test",
+  "DB_HOST": "127.0.0.1",
+  "DB_DIALECT": "mysql",
+  "DB_POOL_MAXCONNECTION": 5,
+  "DB_POOL_MINCONNECTION": 0,
+  "DB_POOL_MAXIDLETIME": 10000,
+  "DB_LOGGING": true
+}
