@@ -1,0 +1,9 @@
+mysql:
+  image: mysql:latest
+  environment:
+    - MYSQL_USER=root
+    - MYSQL_ROOT_PASSWORD=root
+  ports:
+    - "3306:3306"
+  volumes:  # Mount relative path source folder on host to absolute path destination folder on docker container
+    - ./testData:/docker-entrypoint-initdb.d
