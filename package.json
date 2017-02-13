@@ -47,7 +47,7 @@
     "@types/validator": "^5.7.35",
     "@types/winston": "0.0.32",
     "concurrently": "^2.1.0",
-    "coveralls": "^2.11.9",
+    "coveralls": "2.11.9",
     "eslint": "^2.10.2",
     "istanbul": "1.1.0-alpha.1",
     "nodemon": "^1.9.2",
