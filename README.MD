@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.org/melxx001/simple-nodejs-typescript-starter.svg?branch=master)](https://travis-ci.org/melxx001/simple-nodejs-typescript-starter) [![Coverage Status](https://coveralls.io/repos/github/melxx001/simple-nodejs-typescript-starter/badge.svg?branch=master)](https://coveralls.io/github/melxx001/simple-nodejs-typescript-starter?branch=master)
 
 This starter project contains
- - Typescript & typings
+ - Typescript
  - i18n-node
  - tape for testing
  - istanbul coverage
@@ -16,44 +16,44 @@ This starter project contains
 
 ## Installation
 
-(Optional) Globally install the following modules so you can use them in the command line:
+1.- Globally install **yarn**
 
-- `$ npm install -g typescript`
-- `$ npm install -g typings`
-- `$ npm install -g eslint`
+You can find instruction at https://yarnpkg.com/en/docs/install
 
-Setup your IDE (if you didn't already):
+2.- Setup your IDE (if you didn't already):
 - Enable typescript to read from tsconfig.json
 - Enable tslint to read from tslint.json
 - Enable eslint to read from .eslintrc
 
-Setup the project:
+3.- Setup the project:
 
-`$ npm install`
+**Run all the following commands in the root of your project**
+
+Run `$ yarn` and it will install all the dependencies.
 
 ## How to run
 
 ### Start the app in dev mode
 
-`$ npm run dev`
+`$ yarn dev`
 
 ### Running Tests
 
-`$ npm test`
+`$ yarn test`
 
-You must name your test `<name>.test.ts` and save the file in the same folder of the file you are testing.
+You must name your test `<name>.spec.ts` and save the file in the same folder of the file you are testing.
 
-For example, tests for server.ts should be in server.test.ts
+For example, tests for server.ts should be in server.spec.ts
 
     |-- src
       |-- utils.ts
-      |-- utils.test.ts
+      |-- utils.spec.ts
     |-- server.ts
-    |-- server.test.ts
+    |-- server.spec.ts
 
 ### Coverage
 
-`$ npm run coverage`
+`$ yarn cover`
 
 Running coverage will display the coverage percentage in the console.
 
@@ -68,16 +68,6 @@ Typescript documentation can be found at http://www.typescriptlang.org/docs/tuto
 ### Configuration
 
 Typescript configuration can be found at http://www.typescriptlang.org/docs/handbook/tsconfig-json.html
-
-### Typings
-
- - Search for typings: `typings search <name>`
-
-    Ex: `$ typings search react`
-
- - Install typings: `typings install [<name>=]<location>`
-
-    Ex: `$ typings install node -SG`
 
 ## Localization
 
@@ -173,10 +163,6 @@ This micro-lib allows you to provide a script which sets an environment using un
 ### tape
 
 I decided to use the Tape test module after reading https://medium.com/javascript-scene/why-i-use-tape-instead-of-mocha-so-should-you-6aa105d8eaf4#.mo56gj6jk.
-
-#### tape-watch
-
-Auto-test runner for tape.
 
 #### tape-spec
 
